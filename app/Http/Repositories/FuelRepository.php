@@ -12,11 +12,11 @@ class FuelRepository
     {
         $qry = FuelModel::query();
         if(isset($search['from_date'])){
-            $qry->where('date', '>=' ,$search['from_date']);
+            $qry->where('date_issued', '>=' ,$search['from_date']);
         }
         if(isset($search['to_date'])){
-            $qry->where('date','<=', $search['to_date']);
+            $qry->where('date_issued','<=', $search['to_date']);
         }
-        return $qry->orderBy('date', 'asc')->get();
+        return $qry->orderBy('date_issued', 'asc')->get();
     }
 }

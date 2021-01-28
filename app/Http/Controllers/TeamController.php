@@ -22,4 +22,10 @@ class TeamController extends Controller
         $teams = $this->teamRepository->getTeams();
         return new JsonResponse($teams, 200);
     }
+
+    public function getDrivers()
+    {
+        $drivers = $this->teamRepository->getDrivers();
+        return new JsonResponse($drivers, 200);
+    }
 }

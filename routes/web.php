@@ -11,10 +11,12 @@
 |
 */
 
+
+Route::get('/new-trip', function(){ return view('trip');});
+Route::get('/trip/{id}', function(){ return view('trip');});
+Route::get('/trips', function(){ return view('trip');});
+Route::get('/driver', function(){ return view('trip');});
+
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/trip', function(){ return view('trip');});
-Route::get('/trip/{id}', function(){ return view('trip');});
-Route::get('/trips', function(){ return view('trip');});
-//Route::post('/api/trip', \App\Http\Controllers\TripController::save());

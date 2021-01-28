@@ -22,7 +22,6 @@ class TripSalaryController
 
     public function getAll(Request $request)
     {
-        dump($request);
         $search['from_date'] = $request->query->get('from_date', null);
         $search['to_date'] = $request->query->get('to_date', null);
 

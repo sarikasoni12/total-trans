@@ -17,6 +17,6 @@ class RepairRepository
         if(isset($search['to_date'])){
             $qry->where('date','<=', $search['to_date']);
         }
-        return $qry->orderBy('date', 'asc')->get();
+        return $qry->where('paid_by_fuel_card', 0)->orderBy('date', 'asc')->get();
     }
 }

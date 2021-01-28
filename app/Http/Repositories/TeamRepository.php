@@ -4,6 +4,7 @@
 namespace App\Http\Repositories;
 
 
+use App\Models\DriverModel;
 use App\Models\TeamModel;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -15,5 +16,10 @@ class TeamRepository
             ->with(['drivers'])
             ->get();
         return $coll;
+    }
+
+    public function getDrivers(): Collection
+    {
+        return DriverModel::query()->get();
     }
 }

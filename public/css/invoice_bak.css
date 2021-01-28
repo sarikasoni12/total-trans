@@ -1,0 +1,105 @@
+body {
+    background-color: #fff;
+    color: #222;
+    font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    margin-bottom: 100px;
+}
+
+.top {
+    background-color: #7bb0d7;
+    color: white;
+    height: 10%;
+    margin: 0px;
+}
+
+.invoice-block, .header, .invoice-table{
+    width: 50%;
+    margin: auto;
+}
+
+.header, .invoice-block{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 2%;
+}
+.header{
+    padding-top:5%;
+}
+
+.invoice-block .invoice-to{
+    width: 60%;
+}
+
+.invoice-block .invoice-details{
+    width: 40%;
+    text-align: right;
+}
+.invoice-header{
+    width: 60%;
+    font-size: 40px;
+}
+.company-details{
+    width: 40%;
+    text-align: right;
+}
+.company-details div, .invoice-details div{
+    margin-bottom: 2px;
+}
+.company-name {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.bold-text{
+    font-weight: bold;
+}
+
+.spacer{
+    height: 30px;
+}
+
+.div-table {
+    display: table;
+    width: 100%;
+    border: 1px solid #666666;
+    border-spacing: 5px; /* cellspacing:poor IE support for  this */
+}
+.div-table-row {
+    display: table-row;
+    width: 100%;
+    text-align: left;
+}
+.div-table-col, .div-table-header{
+    float: left; /* fix for  buggy browsers */
+    display: table-column;
+    text-align: left;
+    /*border: black 1px solid;*/
+}
+.div-table-header{
+    font-weight: bold;
+    border-bottom: black 1px solid;
+}
+.div-table-row .item, .div-table-row .amount{
+    width: 10%;
+    padding-right: 2%;
+}
+
+.div-table-row .subtotal {
+    width: 80%;
+    text-align: right;
+    padding-right: 20px;
+}
+.div-table-row .total-amount{
+    border-top: black 1px solid;
+}
+
+.div-table-row .pickup-date, .div-table-row .delivery-date{
+    width: 15%;
+    padding-right: 2%;
+}
+
+.div-table-row .shipper, .div-table-row .consignee{
+    width: 20%
+}

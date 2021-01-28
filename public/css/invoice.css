@@ -1,0 +1,94 @@
+body {
+    background-color: #fff;
+    color: #222;
+    font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    margin-bottom: 100px;
+}
+.invoice{
+    width: 800px;
+    margin: auto;
+}
+.top {
+    background-color: #7bb0d7;
+    color: white;
+    height: 10%;
+    margin: 0px;
+}
+
+.block table, .block table table{
+    width: 100%;
+}
+
+.left-card {
+    width: 470px;
+    font-size: 14px;
+    vertical-align: middle;
+    padding-left: 20px;
+}
+
+.right-card{
+    text-align: right;
+    padding: 20px 20px 10px 0px;
+    padding-right: 10px;
+}
+
+.invoice .invoice-title{
+    font-size: 40px;
+}
+
+.invoice .invoice-to{
+    vertical-align: top;
+    width: 570px;
+}
+
+.company-name {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.bold-text{
+    font-weight: bold;
+}
+
+.spacer{
+    height: 30px;
+}
+
+.div-table {
+    width: 100%;
+    border: 1px solid #666666;
+    border-spacing: 0px; /* cellspacing:poor IE support for  this */
+}
+.div-table-row {
+    display: table-row;
+    width: 100%;
+    text-align: left;
+    /*border-top: black 1px solid;*/
+}
+.div-table-col, .div-table-header{
+    float: left; /* fix for  buggy browsers */
+    display: table-column;
+    text-align: left;
+    border-top: black 1px solid;
+}
+.div-table-header{
+    font-weight: bold;
+    border-bottom: black 1px solid;
+}
+.div-table-row .item, .div-table-row .amount{
+    width: 12%;
+    padding-right: 2%;
+}
+.div-table-row .total-amount{
+    border-top: black 1px solid;
+}
+
+.div-table-row .pickup-date, .div-table-row .delivery-date{
+    width: 15%;
+    padding-right: 2%;
+}
+
+.div-table-row .shipper, .div-table-row .consignee{
+    width: 20%
+}
