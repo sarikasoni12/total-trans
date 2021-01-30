@@ -125,6 +125,7 @@ const TripForm = (props) => {
         });
         axios.post(`${domain}/api/trip/${tripId}/upload-documents`, formData)
             .then((res) => {
+                location.href = `${domain}/trips`;
             });
     }
 

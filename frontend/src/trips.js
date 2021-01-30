@@ -209,6 +209,9 @@ const Trips = (props) =>{
                     && trip.invoice_number !== '')
                     && <React.Fragment><CheckIcon />{trip.invoice_number}</React.Fragment>}
 
+                    {trip.invoice_number && getPayments(trip) <= 0 && <React.Fragment>/<br/> {trip.invoice_date}</React.Fragment>}
+
+
                     {(!trip.invoice_date
                         || !trip.invoice_number)
                     && <Button><a href={`/api/trip/${trip.id}/invoice/generate`} target={"_blank"}> Invoice </a> </Button>}
