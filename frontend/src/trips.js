@@ -60,53 +60,44 @@ const Trips = (props) =>{
     const onSearch = (params) => {
         setSearchParam(params)
     }
-
     const getTripTotalInCAD = () => {
        return trips.reduce((total, trip) => {
             return trip.currency === 'CAD'? total+parseInt(trip.price): total+0;
         }, 0)
     };
-
     const getTripTotalInUSD = () => {
         return trips.reduce((total, trip) => {
             return trip.currency === 'USD'? total+parseInt(trip.price): total+0;
         }, 0)
     };
-
     const getAllTripsTotalInCAD = () => {
         return getTripTotalInCAD()+(getTripTotalInUSD()*defaultConversionRate);
     };
-
     const getTotalMiles = () => {
         return trips.reduce((total, trip) => {
             return total+parseInt(trip.miles);
         }, 0)
     };
-
     const getTotalUnitInstallmentAmount = () => {
         return units.reduce((accumulator, unit) => {
             return accumulator+parseInt(unit.installment_amount)+parseInt(unit.insurance_amount)
         }, 0)
     }
-
     const getAllFuelInCAD = () => {
         return fuel.reduce((accumulator, tmpFuel) => {
             return accumulator+(tmpFuel.amount*tmpFuel.currency_rate);
         }, 0);
     };
-
     const getAllRepairInCAD = () => {
         return repair.reduce((accumulator, tmpRepair) => {
             return accumulator+(tmpRepair.amount*tmpRepair.currency_rate);
         }, 0);
     };
-
     const getAllExpensesInCAD = () => {
         return expenses.reduce((accumulator, tmpExpense) => {
             return accumulator+(tmpExpense.amount*tmpExpense.currency_rate);
         }, 0);
     }
-
     const getAllSalary = () => {
         return salary.reduce((accumulator, tmpSalary) => {
             return accumulator+(tmpSalary.amount_on_miles
@@ -116,23 +107,19 @@ const Trips = (props) =>{
                 + tmpSalary.waiting_hours_fee);
         }, 0);
     }
-
     const getTripPaymentInCAD = () => {
         return payments.reduce((total, payment) => {
             return payment.currency === 'USD'? total+parseInt(payment.amount)*payment.currency_rate: total+0;
         }, 0)
     };
-
     const editTrip = (tripId) => {
         history.push(`/trip/${tripId}`);
     };
-
     const getPayments = (trip) => {
         return trip.payments.reduce((accoumulator, trip) => {
                 return accoumulator+trip.amount
             }, 0);
     };
-
     const getTotalPaymentsInCAD = () => {
         return trips.reduce((total, trip) => {
             let tripPayments = trip.payments.reduce((totalPayment, payment) => {
@@ -141,7 +128,6 @@ const Trips = (props) =>{
             return tripPayments+total;
         }, 0)
     }
-
     const getTotalPaymentsInUSD = () => {
         return trips.reduce((total, trip) => {
             let tripPayments = trip.payments.reduce((totalPayment, payment) => {
@@ -149,6 +135,20 @@ const Trips = (props) =>{
             }, 0)
             return tripPayments+total;
         }, 0)
+    }
+    const invoiceStatusClass = (trip) => {
+        let dt1 = new Date(trip.delivery_date);
+        let dt2 = new Date();
+
+        let diff = Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) /(1000 * 60 * 60 * 24));
+
+        if(diff >= 20){
+            return 'blue-status';
+        } else if(diff >= 30) {
+            return 'red-status';
+        } else {
+            return 'black';
+        }
     }
     return <div className={'divTable trips'}>
         <Search onSearch={onSearch}/>
@@ -165,6 +165,7 @@ const Trips = (props) =>{
             <div className="divCell">Price(USD)</div>
             <div className="divCell">Team</div>
             <div className="divCell">Invoice</div>
+            <div className="divCell">Factoring</div>
             <div className="divCell">Payment</div>
         </header>
         {trips.map((trip, index) => {
@@ -202,7 +203,7 @@ const Trips = (props) =>{
                 <div className={'divCell'}>
                     {trip.driver1 && trip.driver1.name}/ {trip.driver2 && trip.driver2.name}
                 </div>
-                <div className={'divCell'}>
+                <div className={`${invoiceStatusClass(trip)} divCell`}>
                     {(trip.invoice_date
                     && trip.invoice_number
                     && trip.invoice_date !== '0000-00-00'
@@ -216,6 +217,9 @@ const Trips = (props) =>{
                         || !trip.invoice_number)
                     && <Button><a href={`/api/trip/${trip.id}/invoice/generate`} target={"_blank"}> Invoice </a> </Button>}
                     {/*<Button><a href={`/api/trip/${trip.id}/invoice/generate`} target={"_blank"}> Invoice </a> </Button>*/}
+                </div>
+                <div className={'divCell'}>
+                    {trip.factoring_done? <CheckIcon />:''}
                 </div>
                 <div className={'divCell'}>
                     {getPayments(trip) > 0? `$ ${getPayments(trip)} `: `--`}
@@ -236,6 +240,7 @@ const Trips = (props) =>{
             <div className="divCell"> &nbsp; </div>
             <div className="divCell"> &nbsp; </div>
             <div className="divCell"> &nbsp; </div>
+            <div className="divCell"> &nbsp; </div>
         </div>
 
         <div className={'divRow'}>
@@ -252,6 +257,7 @@ const Trips = (props) =>{
             <div className="divCell"> &nbsp; </div>
             <div className="divCell"> &nbsp; </div>
             <div className="divCell"> &nbsp; </div>
+            <div className="divCell"> &nbsp; </div>
         </div>
         <div className={'divRow'}>
             <div className="divCell">&nbsp;</div>
@@ -263,6 +269,7 @@ const Trips = (props) =>{
             <div className="divCell">&nbsp;</div>
             <div className="divCell">Total in (CAD)</div>
             <div className="divCell"> ${number_format(getAllTripsTotalInCAD())} (CAD) </div>
+            <div className="divCell"> &nbsp; </div>
             <div className="divCell"> &nbsp; </div>
             <div className="divCell"> &nbsp; </div>
             <div className="divCell"> &nbsp; </div>
@@ -282,6 +289,7 @@ const Trips = (props) =>{
             <div className="divCell"> &nbsp; </div>
             <div className="divCell"> &nbsp; </div>
             <div className="divCell"> &nbsp; </div>
+            <div className="divCell"> &nbsp; </div>
         </div>
         <div className={'divRow'}>
             <div className="divCell">&nbsp;</div>
@@ -293,6 +301,7 @@ const Trips = (props) =>{
             <div className="divCell">Fuel/Repair paid by card (CAD)</div>
             <div className="divCell"> ${number_format(getAllFuelInCAD())} (CAD) </div>
             <div className="divCell">${number_format( getAllTripsTotalInCAD() - getAllFuelInCAD() - getTotalUnitInstallmentAmount())} (CAD)</div>
+            <div className="divCell"> &nbsp; </div>
             <div className="divCell"> &nbsp; </div>
             <div className="divCell"> &nbsp; </div>
             <div className="divCell"> &nbsp; </div>
@@ -312,6 +321,7 @@ const Trips = (props) =>{
             <div className="divCell"> &nbsp; </div>
             <div className="divCell"> &nbsp; </div>
             <div className="divCell"> &nbsp; </div>
+            <div className="divCell"> &nbsp; </div>
         </div>
         <div className={'divRow'}>
             <div className="divCell">&nbsp;</div>
@@ -323,6 +333,7 @@ const Trips = (props) =>{
             <div className="divCell">Expenses in (CAD)</div>
             <div className="divCell"> ${number_format(getAllExpensesInCAD())} (CAD) </div>
             <div className="divCell">${number_format(getAllTripsTotalInCAD() - getAllFuelInCAD() - getAllRepairInCAD() - getTotalUnitInstallmentAmount() - getAllExpensesInCAD())} (CAD)</div>
+            <div className="divCell"> &nbsp; </div>
             <div className="divCell"> &nbsp; </div>
             <div className="divCell"> &nbsp; </div>
             <div className="divCell"> &nbsp; </div>
@@ -342,6 +353,7 @@ const Trips = (props) =>{
             <div className="divCell"> &nbsp; </div>
             <div className="divCell"> &nbsp; </div>
             <div className="divCell"> &nbsp; </div>
+            <div className="divCell"> &nbsp; </div>
         </div>
 
         <div className={'divRow'}>
@@ -354,6 +366,7 @@ const Trips = (props) =>{
             <div className="divCell">Payments in (CAD)</div>
             <div className="divCell"> ${number_format(getTripPaymentInCAD())} (CAD) </div>
             <div className="divCell">&nbsp;</div>
+            <div className="divCell"> &nbsp; </div>
             <div className="divCell"> &nbsp; </div>
             <div className="divCell"> &nbsp; </div>
             <div className="divCell"> &nbsp; </div>
