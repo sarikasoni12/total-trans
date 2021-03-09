@@ -219,7 +219,7 @@ const Trips = (props) =>{
                     {/*<Button><a href={`/api/trip/${trip.id}/invoice/generate`} target={"_blank"}> Invoice </a> </Button>*/}
                 </div>
                 <div className={'divCell'}>
-                    {trip.factoring_done === 1? <CheckIcon />:''}
+                    {trip.factoring_done? <CheckIcon />:''}
                 </div>
                 <div className={'divCell'}>
                     {getPayments(trip) > 0? `$ ${getPayments(trip)} `: `--`}
