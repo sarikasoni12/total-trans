@@ -1,136 +1,171 @@
 body {
     background-color: #fff;
     color: #222;
-    font: 11px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    /*font: 11px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;*/
 }
 
-.divTable{
-    display: table;
+/*.divTable{*/
+/*    display: table;*/
+/*    width: 100%;*/
+/*}*/
+/*header {*/
+/*  font-weight: bold;*/
+/*}*/
+/*header, .divRow{*/
+/*    display: flex;*/
+/*    height: 40px;*/
+/*    border-bottom: .1rem solid #aeaeae;*/
+/*    padding: 5px;*/
+/*}*/
+/*.divCell{*/
+/*    flex: 1;*/
+/*    align-items: center;*/
+/*}*/
+
+/*.divForm{*/
+/*    display: block;*/
+/*    width: 50%;*/
+/*    margin: auto;*/
+/*}*/
+/*.divField{*/
+/*    width: 100%;*/
+/*    margin: 8px 0;*/
+/*}*/
+/*.divField label{*/
+/*    width: 100%;*/
+/*    margin: 0px 20px 0px 0px;*/
+/*}*/
+/*select, input[type='text'] {*/
+/*    width: 100%;*/
+/*    border: none;*/
+/*    background-color: #fff;*/
+/*    box-shadow: 0 0 0 1px #d9d9d9 inset;*/
+/*    padding: .5rem 0.5rem;*/
+/*    border-radius: 5px;*/
+/*    !*margin: 15px 0px 0px 0px;*!*/
+/*}*/
+
+/*!*input[type='button'] {*!*/
+/*!*    width: 200px;*!*/
+/*!*    height: 40px;*!*/
+/*!*}*!*/
+
+/*.cards{*/
+/*    display: flex;*/
+/*}*/
+
+/*.cards .card{*/
+/*    margin: 0px 20px 0px 0px;*/
+/*}*/
+/*.card {*/
+/*    padding: 10px;*/
+/*}*/
+/*.currency{*/
+/*    display: inline-block;*/
+/*    width: 100px;*/
+/*}*/
+
+/*.price {*/
+/*    width: 300px !important;*/
+/*}*/
+
+/*.validation-message{*/
+/*    display: block;*/
+/*    color: #ef0a1ee3;*/
+/*}*/
+
+/*.conversion-rate{*/
+/*    display: inline-block !important;*/
+/*    width: 40px !important;*/
+/*}*/
+
+/*.navBar {*/
+/*    width: 10%;*/
+/*}*/
+/*.navBar .navItem {*/
+/*    margin: 10px;*/
+/*    text-decoration: none;*/
+/*}*/
+
+/*.navBar .navItem a{*/
+/*    text-decoration: none;*/
+/*    color: blue;*/
+/*    font-family: ui-sans-serif;*/
+/*    font-size: 1rem;*/
+/*}*/
+
+/*.page{*/
+/*    width: 90%;*/
+/*}*/
+
+/*.frame{*/
+/*    display: flex;*/
+/*}*/
+
+/*!*.trips .small-button{*!*/
+/*!*    width: 100px;*!*/
+/*!*    height: 20px;*!*/
+/*!*}*!*/
+
+/*.element {*/
+/*    display: inline-block;*/
+/*}*/
+
+/*.inline{*/
+/*    display: inline-block;*/
+/*}*/
+
+/*.address .city{*/
+/*    width: 100px;*/
+/*}*/
+
+/*.address .state{*/
+/*    width: 50px;*/
+/*}*/
+
+/*.address .border{*/
+/*    border: #e1e1e1 1px solid;*/
+/*    padding: 5px;*/
+/*}*/
+
+/*.miles, .price{*/
+/*    width: 100px;*/
+/*}*/
+
+/*.icon{*/
+/*    width: 20px;*/
+/*    height: 20px;*/
+/*}*/
+
+/*.red-status {*/
+/*    color: red;*/
+/*    font-weight: bold;*/
+/*}*/
+
+/*.blue-status {*/
+/*    color: blue;*/
+/*    font-weight: bold;*/
+/*}*/
+
+
+.div-table {
     width: 100%;
+    border: 1px solid #666666;
+    border-spacing: 0px; /* cellspacing:poor IE support for  this */
 }
-header {
-  font-weight: bold;
-}
-header, .divRow{
-    display: flex;
-    height: 40px;
-    border-bottom: .1rem solid #aeaeae;
-    padding: 5px;
-}
-.divCell{
-    flex: 1;
-    align-items: center;
-}
-
-.divForm{
-    display: block;
-    width: 50%;
-    margin: auto;
-}
-.divField{
+.div-table-row {
+    display: table-row;
     width: 100%;
-    margin: 8px 0;
+    text-align: left;
+    /*border-top: black 1px solid;*/
 }
-.divField label{
-    width: 100%;
-    margin: 0px 20px 0px 0px;
+.div-table-col, .div-table-header{
+    float: left; /* fix for  buggy browsers */
+    display: table-column;
+    text-align: left;
+    border-top: black 1px solid;
 }
-select, input[type='text'] {
-    width: 100%;
-    border: none;
-    background-color: #fff;
-    box-shadow: 0 0 0 1px #d9d9d9 inset;
-    padding: .5rem 0.5rem;
-    border-radius: 5px;
-    /*margin: 15px 0px 0px 0px;*/
-}
-
-input[type='button'] {
-    width: 200px;
-    height: 40px;
-}
-
-.cards{
-    display: flex;
-}
-
-.cards .card{
-    margin: 0px 20px 0px 0px;
-}
-
-.currency{
-    display: inline-block;
-    width: 100px;
-}
-
-.price {
-    width: 300px !important;
-}
-
-.validation-message{
-    display: block;
-    color: #ef0a1ee3;
-}
-
-.conversion-rate{
-    display: inline-block !important;
-    width: 40px !important;
-}
-
-.navBar {
-    width: 10%;
-}
-.navBar .navItem {
-    margin: 10px;
-    text-decoration: none;
-}
-
-.navBar .navItem a{
-    text-decoration: none;
-    color: blue;
-    font-family: ui-sans-serif;
-    font-size: 1rem;
-}
-
-.page{
-    width: 90%;
-}
-
-.frame{
-    display: flex;
-}
-
-.trips .small-button{
-    width: 100px;
-    height: 20px;
-}
-
-.element {
-    display: inline-block;
-}
-
-.inline{
-    display: inline-block;
-}
-
-.address .city{
-    width: 100px;
-}
-
-.address .state{
-    width: 50px;
-}
-
-.address .border{
-    border: #e1e1e1 1px solid;
-    padding: 5px;
-}
-
-.miles, .price{
-    width: 100px;
-}
-
-.icon{
-    width: 20px;
-    height: 20px;
+.div-table-header{
+    font-weight: bold;
+    border-bottom: black 1px solid;
 }

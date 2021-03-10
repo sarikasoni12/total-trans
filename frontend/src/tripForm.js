@@ -112,7 +112,10 @@ const TripForm = (props) => {
                     .then(res => {
                         saveAddress(res.trip_id, 'consignee', consigneeAddress)
                             .then(res => {
-                                uploadDocuments(res.trip_id)
+                                saveDrivers(res.trip_id, drivers)
+                                    .then(res => {
+                                        uploadDocuments(res.trip_id)
+                                    })
                             });
                     })
             });
@@ -131,6 +134,11 @@ const TripForm = (props) => {
 
     const saveAddress = (tripId, addressType, data) => {
         return post(`/trip/${tripId}/address/${addressType}`, data)
+            .then(res => res);
+    }
+
+    const saveDrivers = (tripId, drivers) => {
+        return post(`/trip/${tripId}/drivers`, drivers)
             .then(res => res);
     }
 
@@ -206,105 +214,111 @@ const TripForm = (props) => {
         }
 
     }, [tripId]);
-    return <div className="divForm newTrip">
-        <div className="divField cards">
-            <TripDates
-                startDate={startDate}
-                setStartDate={setStartDate}
-                expectEndDate={expectEndDate}
-                setExpectedEndDate={setExpectedEndDate}
-                endDate={endDate}
-                setEndDate={setEndDate}
-            />
-        </div>
-        <div className="divField cards">
-            <div className={'card'}>
-                <label>PO Order No:</label>
-                <div>
-                    <input type={"text"} name={"po_number"} value={poOrderNo} onChange={(e) => {
-                        setPoOrderNo(e.target.value)
-                    }}/>
-                    {poOrderNo === '' && <small className="validation-message">*PO order number</small>}
-                </div>
+
+    return <form className="container">
+        <nav aria-label="breadcrumb">
+            <ol className="breadcrumb">
+                <li className="breadcrumb-item"><a href="/trips">Trips</a></li>
+                <li className="breadcrumb-item active" aria-current="page">ID # {tripId}</li>
+            </ol>
+        </nav>
+
+        <div className="form-row">
+            <Brokers brokerId = {brokerId} addBroker={addBroker}/>
+            <div className="form-group col-md-2">
+                <label htmlFor="poOrder">PO Order No:</label>
+                <input
+                    className="form-control"
+                    id={"poOrder"}
+                    type={"text"}
+                    name={"po_number"}
+                    value={poOrderNo} onChange={(e) => {
+                    setPoOrderNo(e.target.value)
+                }}
+                    placeholder="PO Order #"
+                />
+                {/*{poOrderNo === '' && <small className="validation-message">*PO order number</small>}*/}
             </div>
-            <div className={'card'}>
-                <label>PO Order Date:</label>
-                <div>
+            <div className="form-group col-md-2">
+                <label htmlFor="poDate">PO Order Date:</label>
+                <div id={"poDate"}>
                     <DatePicker
                         name="po_order_date"
                         selected={poOrderDate}
                         onChange={date => setPoOrderDate(date)}
                         dateFormat="dd-MM-yyyy"
+                        className={"form-control"}
                     />
                 </div>
-                {poOrderDate === '' && <small className="validation-message">*Enter PO order date</small>}
-
+                {/*{poOrderDate === '' && <small className="validation-message">*Enter PO order date</small>}*/}
+            </div>
+            <div className={"col-md-5"}>
+                <div className="form-row">
+                    <Price
+                        price={price}
+                        setPrice={setPrice}
+                        currency={currency}
+                        changeCurrency={changeCurrency}
+                        conversionRate={conversionRate}
+                        setConversionRate={setConversionRate}
+                    />
+                </div>
             </div>
         </div>
-        <div className="divField cards address">
-            <div className={'card border'}>
-                <label><b>Shipper Address</b></label>
-                <Address address={shipperAddress} onChange={setShipperAddress}/>
+
+        <TripDates
+            startDate={startDate}
+            setStartDate={setStartDate}
+            expectEndDate={expectEndDate}
+            setExpectedEndDate={setExpectedEndDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
+        />
+        <div className="form-row">
+            <div className={'col-md-5'}>
+                <h6>Shipper Address</h6>
+                <Address id="shipper" address={shipperAddress} onChange={setShipperAddress}/>
             </div>
-            <div className={'card border'}>
-                <label><b>Consignee Address</b></label>
+            <div className={'col-md-5'}>
+               <h6>Consignee Address</h6>
                 <Address address={consigneeAddress} onChange={setConsigneeAddress}/>
             </div>
         </div>
-
-        <div className="divField"><label>Pick-up location:</label>
-            <input type="text" name="pickup_location" value={pickUpLocation}
-                   onChange={(evt) => setPickUpLocation(evt.target.value)}/>
-            {pickUpLocation === '' && <small className="validation-message">*Enter valid pick-up location</small>}
-        </div>
-        <div className="divField"><label>Delivery location:</label>
-            <input type="text" name="dest_location" value={deliveryLocation}
-                   onChange={(evt) => setDeliveryLocation(evt.target.value)}/>
-            {deliveryLocation === '' && <small className="validation-message">*Enter valid delivery location</small>}
-        </div>
-
-        <div className="divField cards">
-            <div className="card">
-                <label>Miles :</label>
-                <input className={'miles'} type="text" name="miles" value={miles}
-                       onChange={(evt) => setMiles(evt.target.value)}/>
-                {miles === '' && <small className="validation-message">*Enter valid miles</small>}
+        <div className="form-row">
+            <div className="form-group col-md-2">
+                <label for={"miles"}>Miles :</label>
+                <input
+                    id={"miles"}
+                    className="form-control"
+                    type="text" name="miles" value={miles}
+                    onChange={(evt) => setMiles(evt.target.value)}/>
+                {/*{miles === '' && <small className="validation-message">*Enter valid miles</small>}*/}
             </div>
-            <div className={'card'}>
-                <label>Truck:</label>
-                <Trucks addTruck = {addTruck} truckId={truck}/>
-
+            <div className={'form-group col-md-2'}>
+                <Trucks id="truck" addTruck = {addTruck} truckId={truck}/>
             </div>
-            <div className={'card'}>
-                <label>Trailer:</label>
-                <div>
-                    <div className={'inline'}>
-                        <Trailers addTrailer={addTrailer} trailerId={trailer}/>
-                    </div>
-                    {(trailer === '0' || !trailer)&&
-                    <div className={'inline'}>
-                        <input type='text' name={'trailer_other'} value={trailerOther} onChange={(e) => {
-                            setTrailerOther(e.target.value)
-                        }}/>
-                    </div>
-                    }
+            <div className={'form-group col-md-2'}>
+               <Trailers addTrailer={addTrailer} trailerId={trailer}/>
+            </div>
+            {(trailer === '0') &&
+                <div className={'form-group col-md-2'}>
+                    <label></label>
+                    <input
+                        className="form-control"
+                        type='text' name={'trailer_other'} value={trailerOther} onChange={(e) => {
+                        setTrailerOther(e.target.value)
+                    }}/>
                 </div>
-            </div>
+            }
         </div>
-        <Brokers brokerId = {brokerId} addBroker={addBroker}/>
-        <Price
-            price={price}
-            setPrice={setPrice}
-            currency={currency}
-            changeCurrency={changeCurrency}
-            conversionRate={conversionRate}
-            setConversionRate={setConversionRate}
-        />
         <Drivers drivers={drivers} addDriver={addDriver}/>
 
-        <div className="divField cards">
-            <div className={'card'}><label>Border crossings</label>
-                <div><select value={borderCrossingNo} name="border_crossing_no" onChange={(evt) => {
+        <div className="form-row">
+            <div className={'form-group col-md-2'}>
+                <label>Border crossings</label>
+                <select
+                    className="form-control"
+                    value={borderCrossingNo} name="border_crossing_no" onChange={(evt) => {
                     setBorderCrossingNo(evt.target.value)
                 }}>
                     <option> --</option>
@@ -312,10 +326,12 @@ const TripForm = (props) => {
                     <option value="2">2</option>
                     <option value="3">3</option>
                 </select>
-                </div>
             </div>
-            <div className={'card'}><label>Layovers: </label>
-                <div><select name="layover" value={layover} onChange={(evt) => {
+            <div className={'form-group col-md-2'}>
+                <label>Layovers: </label>
+                <select
+                    className="form-control"
+                    name="layover" value={layover} onChange={(evt) => {
                     setLayover(evt.target.value)
                 }}>
                     <option> --</option>
@@ -323,10 +339,12 @@ const TripForm = (props) => {
                     <option value="2">2</option>
                     <option value="3">3</option>
                 </select>
-                </div>
             </div>
-            <div className="card"><label>Pick-up deliveries:</label>
-                <div><select name="pickup_delivery_no" value={pickUpDeliveryNo} onChange={(evt) => {
+            <div className="form-group col-md-2">
+                <label>Pick-up deliveries:</label>
+                <select
+                    className="form-control"
+                    name="pickup_delivery_no" value={pickUpDeliveryNo} onChange={(evt) => {
                     setPickUpDeliveryNo(evt.target.value)
                 }}>
                     <option> --</option>
@@ -334,10 +352,12 @@ const TripForm = (props) => {
                     <option value="2">2</option>
                     <option value="3">3</option>
                 </select>
-                </div>
             </div>
-            <div className="card"><label>Waiting hours:</label>
-                <div><select name="waiting_hours" value={waitingHours} onChange={(evt) => {
+            <div className="form-group col-md-2">
+                <label>Waiting hours:</label>
+                <select
+                    className="form-control"
+                    name="waiting_hours" value={waitingHours} onChange={(evt) => {
                     setWaitingHours(evt.target.value)
                 }}>
                     <option> --</option>
@@ -348,16 +368,15 @@ const TripForm = (props) => {
                     <option value="5">5</option>
                     <option value="6">6</option>
                 </select>
-                </div>
             </div>
         </div>
-        <div className="divField">
+        <div className=" form-group">
             <UploadFiles onFileChange={onFileChange} documents={uploads} tripId={tripId}/>
         </div>
         <div>
-            <input type='button' name='save' value={'Save'} onClick={saveTrip}/>
+            <input className={"btn btn-primary btn-lg"} type='button' name='save' value={'Save Trip'} onClick={saveTrip}/>
         </div>
-    </div>
+    </form>
 };
 
 export default TripForm;

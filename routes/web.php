@@ -20,3 +20,7 @@ Route::get('/driver', function(){ return view('trip');});
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

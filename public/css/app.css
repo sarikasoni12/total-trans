@@ -1,0 +1,12 @@
+/**** Custom for TTF ******/
+.form-control.select {
+    max-width: 100px;
+}
+
+.btn{
+    max-height: 40px;
+}
+
+.card.new-trip {
+    margin-left: auto;
+}

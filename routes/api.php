@@ -21,16 +21,21 @@ Route::get('/units', ['uses' =>  "\App\Http\Controllers\UnitController@getAll"])
 Route::get('/trucks', ['uses' =>  "\App\Http\Controllers\UnitController@getTruckUnits"]);
 Route::get('/trailers', ['uses' =>  "\App\Http\Controllers\UnitController@getTrailerUnits"]);
 Route::get('/brokers', ['uses' =>  "\App\Http\Controllers\BrokerController@getBrokers"]);
+
 Route::get('/drivers', ['uses' =>  "\App\Http\Controllers\DriverController@getAll"]);
 Route::get('/drivers', ['uses' =>  "\App\Http\Controllers\TeamController@getDrivers"]);
+
 Route::get('/driver/{driver_id}/salary', ['uses' =>  "\App\Http\Controllers\DriverController@getSalary"]);
 Route::get('/driver/salary', ['uses' =>  "\App\Http\Controllers\DriverController@getSalaryForAll"]);
 
 Route::get('/trips', ['uses' =>  "\App\Http\Controllers\TripController@getAll"]);
+
 Route::get('/trip/{id}', ['uses' =>  "\App\Http\Controllers\TripController@getById"]);
 Route::post('/trip', ['uses' =>  "\App\Http\Controllers\TripController@saveTrip"]);
 Route::post('/trip/{trip_id}/upload-documents', ['uses' =>  "\App\Http\Controllers\TripController@uploadDocuments"]);
 Route::post('/trip/{trip_id}/address/{address_type}', ['uses' =>  "\App\Http\Controllers\TripController@saveAddress"]);
+Route::post('/trip/{trip_id}/drivers', ['uses' =>  "\App\Http\Controllers\TripController@saveDrivers"]);
+
 Route::get('/trip/{trip_id}/document/{id}', ['uses' =>  "\App\Http\Controllers\TripDocumentController@get"]);
 
 Route::get('/payment', ['uses' =>  "\App\Http\Controllers\TripPaymentController@get"]);

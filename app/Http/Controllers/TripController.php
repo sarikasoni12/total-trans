@@ -32,6 +32,8 @@ class TripController extends Controller
         $search['from_date'] = $request->query->get('from_date', null);
         $search['to_date'] = $request->query->get('to_date', null);
         $search['driver_id'] = $request->query->get('driver_id', null);
+        $search['truck_id'] = $request->query->get('truck_id', null);
+        $search['broker_id'] = $request->query->get('broker_id', null);
 
         $trips = $this->tripRepository->getAll($search);
         return new JsonResponse($trips, 200);
@@ -101,5 +103,10 @@ class TripController extends Controller
     {
         $documentId = $request->request->get('id');
 
+    }
+
+    public function saveDrivers()
+    {
+        return new JsonResponse([], 200);
     }
 }

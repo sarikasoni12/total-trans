@@ -16,6 +16,8 @@ class DriverRepository
 
     public function getAll():Collection
     {
-        return DriverModel::query()->all();
+        return DriverModel::query()
+            ->whereNull('date_of_departure')
+            ->get();
     }
 }

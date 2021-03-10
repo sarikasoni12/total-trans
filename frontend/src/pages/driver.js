@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {get} from "../common/api";
-import Search from "../components/search";
+import Search from "../search";
 import CheckIcon from "../Elements/CheckIcon";
 import Button from "../Elements/Button";
 import {formatDate, number_format} from "../common/formatting";
@@ -69,60 +69,113 @@ const Driver = () => {
     const onSearch = (params) => {
         setSearchParam(params)
     }
-    return <div>
-        <Search onSearch={onSearch}/>
-        <header>
-            <div className="divCell">Trip Id#</div>
-            <div className="divCell">Pick-up - Delivery Date</div>
-            <div className="divCell">Amount on miles</div>
-            <div className="divCell">Border crossing fee</div>
-            <div className="divCell">Layover</div>
-            <div className="divCell">Pickup-delivery fee</div>
-            <div className="divCell">Waiting fee</div>
-        </header>
-        {trips.map((trip, index) => {
-            return <div className={'divRow'} key={index} onClick={() => editTrip(trip.id)}>
-                <div className={'divCell'}>
-                    {trip.trip_id}
+    return   <div className="container-fluid p-0">
+        {/*<h1 className="h3 mb-3">Responsive DataTables</h1>*/}
+        <div className="row">
+            <div className="col-12">
+                <div className="card">
+                    <div className="card-body">
+                        <div id="datatables-reponsive_wrapper"
+                             className="dataTables_wrapper dt-bootstrap4 no-footer">
+                            <div className="row">
+                                <form className="d-none d-sm-inline-block">
+                                    <div className="input-group input-group-navbar">
+                                        <Search onSearch={onSearch}/>
+                                    </div></form>
+                            </div>
+                            <div className="row">
+                                <div className="col-sm-12">
+                                    <table id="datatables-reponsive"
+                                           className="table table-striped dataTable no-footer dtr-inline"
+                                        // style="width: 100%;"
+                                           role="grid"
+                                           aria-describedby="datatables-reponsive_info">
+                                        <thead>
+                                        <tr role="row">
+                                            <th className="sorting_asc" tabIndex="0"
+                                                aria-controls="datatables-reponsive" rowSpan="1" colSpan="1"
+                                                // style="width: 155px;"
+                                                aria-sort="ascending"
+                                                aria-label="Name: activate to sort column descending">ID#
+                                            </th>
+                                            <th className="sorting" tabIndex="0"
+                                                aria-controls="datatables-reponsive" rowSpan="1" colSpan="1"
+                                                // style="width: 237px;"
+                                                aria-label="Position: activate to sort column ascending">Dates#
+                                            </th>
+                                            <th className="sorting" tabIndex="0"
+                                                aria-controls="datatables-reponsive" rowSpan="1" colSpan="1"
+                                                // style="width: 112px;"
+                                                aria-label="Office: activate to sort column ascending">Amount on miles
+                                            </th>
+                                            <th className="sorting" tabIndex="0"
+                                                aria-controls="datatables-reponsive" rowSpan="1" colSpan="1"
+                                                // style="width: 49px;"
+                                                aria-label="Age: activate to sort column ascending">Border crossing fee
+                                            </th>
+                                            <th className="sorting" tabIndex="0"
+                                                aria-controls="datatables-reponsive" rowSpan="1" colSpan="1"
+                                                // style="width: 102px;"
+                                                aria-label="Start date: activate to sort column ascending">Layover
+                                            </th>
+                                            <th className="sorting" tabIndex="0"
+                                                aria-controls="datatables-reponsive" rowSpan="1" colSpan="1"
+                                                // style="width: 80px;"
+                                                aria-label="Salary: activate to sort column ascending">Pickup-delivery fee
+                                            </th>
+                                            <th className="sorting" tabIndex="0"
+                                                aria-controls="datatables-reponsive" rowSpan="1" colSpan="1"
+                                                // style="width: 80px;"
+                                                aria-label="Salary: activate to sort column ascending">Waiting fee
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {trips.map((trip, index) => {
+                                            return <tr role="row" className="odd">
+                                                <td className="dtr-control sorting_1" tabIndex="0">
+                                                    <a href={"#"} onClick={() => editTrip(trip.id)}> {trip.trip_id}</a>
+                                                </td>
+                                                <td>{trip.trip_delivery_date}</td>
+                                                <td> $ {number_format(trip.amount_on_miles, 2)} </td>
+                                                <td> $ {trip.border_crossing_fee} </td>
+                                                <td> $ {trip.layover_fee} </td>
+                                                <td> $ {trip.pickup_delivery_fee} </td>
+                                                <td>
+                                                    ${trip.waiting_hours_fee}
+                                                </td>
+                                            </tr>
+                                        })}
+                                        <tr className={'divRow'}>
+                                            <td className="divCell">&nbsp;</td>
+                                            <td className="divCell">&nbsp;</td>
+                                            <td className="divCell">$ {number_format(getTotalAmountOnMiles(), 2)}</td>
+                                            <td className="divCell">$ {number_format(getTotalBorderCrossingFee(), 2)}</td>
+                                            <td className="divCell">$ {number_format(getTotalLayover(), 2)}</td>
+                                            <td className="divCell">$ {number_format(getTotalPickUpDeliverFee(), 2)}</td>
+                                            <td className="divCell">$ {number_format(getTotalWaitingFee(), 2)}</td>
+                                        </tr>
+                                        <tr className={'divRow'}>
+                                            <td className="divCell">&nbsp;</td>
+                                            <td className="divCell">&nbsp;</td>
+                                            <td className="divCell">$ {number_format(getTotalSalary(), 2)}</td>
+                                            <td className="divCell">&nbsp;</td>
+                                            <td className="divCell">&nbsp;</td>
+                                            <td className="divCell">&nbsp;</td>
+                                            <td className="divCell">&nbsp;</td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-                <div className={'divCell'}>
-                    {trip.trip_delivery_date}
-                </div>
-                <div className={'divCell'}>
-                    $ {number_format(trip.amount_on_miles, 2)}
-                </div>
-                <div className={'divCell'}>
-                    $ {trip.border_crossing_fee}
-                </div>
-                <div className={'divCell'}>
-                    $ {trip.layover_fee}
-                </div>
-                <div className={'divCell'}>
-                    $ {trip.pickup_delivery_fee}
-                </div>
-                <div className={'divCell'}>
-                     ${trip.waiting_hours_fee}
-                </div>
-            </div>;
-        })}
-        <div className={'divRow'}>
-            <div className="divCell">&nbsp;</div>
-            <div className="divCell">&nbsp;</div>
-            <div className="divCell">$ {number_format(getTotalAmountOnMiles(), 2)}</div>
-            <div className="divCell">$ {number_format(getTotalBorderCrossingFee(), 2)}</div>
-            <div className="divCell">$ {number_format(getTotalLayover(), 2)}</div>
-            <div className="divCell">$ {number_format(getTotalPickUpDeliverFee(), 2)}</div>
-            <div className="divCell">$ {number_format(getTotalWaitingFee(), 2)}</div>
+            </div>
         </div>
-        <div className={'divRow'}>
-            <div className="divCell">&nbsp;</div>
-            <div className="divCell">&nbsp;</div>
-            <div className="divCell">$ {number_format(getTotalSalary(), 2)}</div>
-            <div className="divCell">&nbsp;</div>
-            <div className="divCell">&nbsp;</div>
-            <div className="divCell">&nbsp;</div>
-            <div className="divCell">&nbsp;</div>
-        </div>
+
     </div>
 };
 

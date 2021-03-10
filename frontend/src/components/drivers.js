@@ -5,16 +5,16 @@ import Checkbox from "./checkbox";
 const Drivers = (props) => {
 
     let [allDrivers, setAllDrivers] = useState([]);
-
     useEffect(() => {
-        if(allDrivers.length<=0){
+        if(allDrivers.length<=0)
+        {
             get('/drivers')
                 .then((res) => {
                     setAllDrivers(res);
                 });
         }
 
-    }, [])
+    }, []);
 
 
     const addDriver = (e) => {
@@ -29,23 +29,34 @@ const Drivers = (props) => {
         }
     }
 
-    return <div className="divField"><label>Drivers:</label>
+    return <div className="form-group">
+        <label>Drivers:</label>
+        <table>
+            <tr>
+                <td>Name</td>
+                <td>Miles</td>
+                <td>Cents/mile</td>
+            </tr>
+
         {allDrivers.map((driver) => {
             let index = props.drivers.indexOf(driver.id);
-            console.log(`${props.drivers}--${driver.id}`);
             let checked = false;
             if (index !== -1) {
                 checked = true;
             }
 
-            return <React.Fragment>
-               {/* <Checkbox value={driver.id} checked={checked} onChange={addDriver} label={driver.name}/>*/}
-                <div><input type="checkbox"
+            return <tr>
+                <td>
+                    <input type="checkbox"
                             value={driver.id}
                             checked={checked}
-                            onChange={addDriver}/>{driver.name}</div>
-            </React.Fragment>
+                            onChange={addDriver}/> {driver.name}
+                </td>
+                <td><input type={"text"} className="form-control"/></td>
+                <td><input type={"text"} className="form-control" defaultValue={driver.cents_per_mile}/></td>
+            </tr>
         })}
+        </table>
     </div>
 }
 

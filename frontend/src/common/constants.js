@@ -1,3 +1,3 @@
-export  const domain = 'http://totaltr1.wwwmi3-ss55.a2hosted.com';
+export  const domain = 'http://127.0.0.1:8000';
 export const defaultConversionRate = 1.3;
 

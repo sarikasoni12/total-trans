@@ -13,7 +13,7 @@ class TripRepository
     public function getAll($search): Collection
     {
         $qry = TripModel::query()
-            ->with(['truck', 'trailer', 'broker', 'driver1', 'driver2', 'payments']);
+            ->with(['truck', 'trailer', 'broker', 'driver1', 'driver2', 'payments', 'shipperAddress', 'consigneeAddress']);
 
         if(isset($search['from_date'])){
             $qry->where('delivery_Date', '>=' ,$search['from_date']);
@@ -27,7 +27,12 @@ class TripRepository
                 $q->where('driver1', $search['driver_id'])
                     ->orWhere('driver2', $search['driver_id']);
             });
-
+        }
+        if(isset($search['truck_id'])){
+            $qry->where('truck_unit', $search['truck_id']);
+        }
+        if(isset($search['broker_id'])){
+            $qry->where('broker_id', $search['broker_id']);
         }
         return $qry->orderBy('id', 'asc')->get();
     }

@@ -3,40 +3,49 @@ import DatePicker from "react-datepicker";
 
 const TripDates = (props) => {
 
-    return <React.Fragment>
-        <div className={'card'}><label>Pick-up Date:</label>
-            <div><DatePicker
+    return <div className="form-row">
+        <div className={'form-group col-md-2'}>
+            <label for={"pickup-date"}>Pick-up Date:</label>
+            <DatePicker
                 name="start_date"
                 selected={props.startDate}
                 onChange={date => props.setStartDate(date)}
                 dateFormat="dd-MM-yyyy"
+                className="form-control"
+                id={"pickup-date"}
             />
-            </div>
-            {props.startDate === '' && <small className="validation-message">*Enter valid Pick-up Date</small>}
+            {/*</div>*/}
+            {/*{props.startDate === '' && <small className="validation-message">*Enter valid Pick-up Date</small>}*/}
         </div>
-        <div className={'card'}><label>Expected Delivery Date: </label>
-            <div>
+        <div className={'form-group col-md-2'}>
+            <label for={"expected-delivery-date"}>Expected Delivery Date: </label>
+            {/*<div>*/}
                 <DatePicker
                     name="expected_end_date"
                     selected={props.expectEndDate}
                     onChange={date => props.setExpectedEndDate(date)}
                     dateFormat="dd-MM-yyyy"
+                    id={"expected-delivery-date"}
+                    className="form-control"
                 />
-            </div>
-            {props.expectEndDate === '' && <small className="validation-message">*Enter valid delivery Date</small>}
+            {/*</div>*/}
+            {/*{props.expectEndDate === '' && <small className="validation-message">*Enter valid delivery Date</small>}*/}
         </div>
-        <div className="card"><label>Delivery Date:</label>
-            <div>
+        <div className="form-group col-md-2">
+            <label for={"delivery-date"}>Delivery Date:</label>
+            {/*<div>*/}
                 <DatePicker
                     name="end_date"
                     selected={props.endDate}
                     onChange={date => props.setEndDate(date)}
                     dateFormat="dd-MM-yyyy"
+                    id={"delivery-date"}
+                    className="form-control"
                 />
-            </div>
-            {props.endDate === '' && <small className="validation-message">*Enter valid delivery Date</small>}
+            {/*</div>*/}
+            {/*{props.endDate === '' && <small className="validation-message">*Enter valid delivery Date</small>}*/}
         </div>
-    </React.Fragment>
+    </div>
 }
 
 export default TripDates;
