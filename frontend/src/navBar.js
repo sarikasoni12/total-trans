@@ -24,7 +24,7 @@ const NavBar = () => {
               c0.2,0.5,0,1.1-0.5,1.3l-9,4C10.3,20,10.1,20,10,20z"></path>
           </svg>
 
-                                   <span className="align-middle mr-3">AppStack</span>
+                                   <span className="align-middle mr-3">TTF</span>
                                </a>
 
                                <ul className="sidebar-nav">

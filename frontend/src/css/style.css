@@ -3,6 +3,10 @@ body {
     color: #222;
     /*font: 11px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;*/
 }
+.icon{
+    width: 20px;
+    height: 20px;
+}
 
 /*.divTable{*/
 /*    display: table;*/
@@ -132,10 +136,7 @@ body {
 /*    width: 100px;*/
 /*}*/
 
-/*.icon{*/
-/*    width: 20px;*/
-/*    height: 20px;*/
-/*}*/
+
 
 /*.red-status {*/
 /*    color: red;*/
@@ -148,24 +149,24 @@ body {
 /*}*/
 
 
-.div-table {
-    width: 100%;
-    border: 1px solid #666666;
-    border-spacing: 0px; /* cellspacing:poor IE support for  this */
-}
-.div-table-row {
-    display: table-row;
-    width: 100%;
-    text-align: left;
-    /*border-top: black 1px solid;*/
-}
-.div-table-col, .div-table-header{
-    float: left; /* fix for  buggy browsers */
-    display: table-column;
-    text-align: left;
-    border-top: black 1px solid;
-}
-.div-table-header{
-    font-weight: bold;
-    border-bottom: black 1px solid;
-}
+/*.div-table {*/
+/*    width: 100%;*/
+/*    border: 1px solid #666666;*/
+/*    border-spacing: 0px; !* cellspacing:poor IE support for  this *!*/
+/*}*/
+/*.div-table-row {*/
+/*    display: table-row;*/
+/*    width: 100%;*/
+/*    text-align: left;*/
+/*    !*border-top: black 1px solid;*!*/
+/*}*/
+/*.div-table-col, .div-table-header{*/
+/*    float: left; !* fix for  buggy browsers *!*/
+/*    display: table-column;*/
+/*    text-align: left;*/
+/*    border-top: black 1px solid;*/
+/*}*/
+/*.div-table-header{*/
+/*    font-weight: bold;*/
+/*    border-bottom: black 1px solid;*/
+/*}*/
