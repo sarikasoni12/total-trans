@@ -204,10 +204,10 @@ const TripForm = (props) => {
 
                     let driversTemp = [];
                     if(res.driver1_id){
-                        driversTemp[driversTemp.length] = res.driver1_id;
+                        driversTemp[driversTemp.length] = parseInt(res.driver1_id);
                     }
                     if(res.driver2_id){
-                        driversTemp[driversTemp.length] = res.driver2_id;
+                        driversTemp[driversTemp.length] = parseInt(res.driver2_id);
                     }
                     setDrivers(driversTemp);
                 });
