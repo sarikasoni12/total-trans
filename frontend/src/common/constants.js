@@ -1,3 +1,3 @@
-export  const domain = 'http://127.0.0.1:8000';
+export  const domain = 'https://www.totaltransfidelity.com';
 export const defaultConversionRate = 1.3;
 

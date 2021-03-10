@@ -450,7 +450,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n})
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n  value: true\n}));\nvar domain = exports.domain = 'http://127.0.0.1:8000';\nvar defaultConversionRate = exports.defaultConversionRate = 1.3;\n\n//# sourceURL=webpack://frontend/./src/common/constants.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", ({\n  value: true\n}));\nvar domain = exports.domain = 'https://www.totaltransfidelity.com';\nvar defaultConversionRate = exports.defaultConversionRate = 1.3;\n\n//# sourceURL=webpack://frontend/./src/common/constants.js?");
 
 /***/ }),
 
