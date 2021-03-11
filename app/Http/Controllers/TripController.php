@@ -105,8 +105,9 @@ class TripController extends Controller
 
     }
 
-    public function saveDrivers()
+    public function saveDrivers(Request $request, $tripId)
     {
-        return new JsonResponse([], 200);
+        $tripId = (int)$tripId;
+        return new JsonResponse(['trip_id' => $tripId], 200);
     }
 }
