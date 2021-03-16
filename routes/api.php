@@ -23,7 +23,7 @@ Route::get('/trailers', ['uses' =>  "\App\Http\Controllers\UnitController@getTra
 Route::get('/brokers', ['uses' =>  "\App\Http\Controllers\BrokerController@getBrokers"]);
 
 Route::get('/drivers', ['uses' =>  "\App\Http\Controllers\DriverController@getAll"]);
-Route::get('/drivers', ['uses' =>  "\App\Http\Controllers\TeamController@getDrivers"]);
+//Route::get('/drivers', ['uses' =>  "\App\Http\Controllers\TeamController@getDrivers"]);
 
 Route::get('/driver/{driver_id}/salary', ['uses' =>  "\App\Http\Controllers\DriverController@getSalary"]);
 Route::get('/driver/salary', ['uses' =>  "\App\Http\Controllers\DriverController@getSalaryForAll"]);

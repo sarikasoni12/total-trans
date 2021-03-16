@@ -76,7 +76,7 @@ const NavBar = () => {
                                        </ul>
                                    </li>
                                    <li className="sidebar-item">
-                                       <a href="/driver" data-toggle="collapse" className="sidebar-link collapsed">
+                                       <a href="#drivers" data-toggle="collapse" className="sidebar-link collapsed">
                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
                                                 strokeLinecap="round" strokeLinejoin="round"
@@ -90,12 +90,12 @@ const NavBar = () => {
                                                 Drivers</span>
                                            {/*<span className="badge badge-sidebar-secondary">Special</span>*/}
                                        </a>
-                                       <ul id="auth" className="sidebar-dropdown list-unstyled collapse "
+                                       <ul id="drivers" className="sidebar-dropdown list-unstyled collapse "
                                            data-parent="#sidebar">
                                            <li className="sidebar-item"><a className="sidebar-link"
-                                                                           href="pages-sign-in.html">Add New</a></li>
+                                                                           href="/driver">Salary</a></li>
                                            <li className="sidebar-item"><a className="sidebar-link"
-                                                                           href="pages-sign-up.html">List All</a></li>
+                                                                           href="/drivers">List All</a></li>
                                        </ul>
                                    </li>
                                    <li className="sidebar-item">

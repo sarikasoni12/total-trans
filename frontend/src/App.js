@@ -4,6 +4,7 @@ import TripForm from "./tripForm";
 import Trips from "./trips";
 import {domain} from './common/constants';
 import Driver from "./pages/driver";
+import Drivers from "./pages/drivers";
 import NavBar from "./navBar";
 import Dashboard from "./dashboard";
 import Footer from "./footer";
@@ -23,6 +24,7 @@ const Page = () => {
         <Route exact={true} path={'/trips'} component={AllTrips}></Route>
         <Route exact={true} path={'/driver'} component={Driver}></Route>
         <Route exact={true} path={'/home'} component={Dashboard}></Route>
+        <Route exact={true} path={'/drivers'} component={Drivers}></Route>
     </BrowserRouter>;
 };
 

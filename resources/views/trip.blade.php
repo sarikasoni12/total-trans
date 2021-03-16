@@ -12,6 +12,7 @@
 </body>
 </html>
 <script src="{{env('APP_URL')}}/js/light.js"></script>
+<script src="{{env('APP_URL')}}/js/app.js"></script>
 <script src="/js/main.js"></script>
 
 
