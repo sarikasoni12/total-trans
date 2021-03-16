@@ -117,7 +117,7 @@ const AllTrips = (props) => {
     };
     const getPayments = (trip) => {
         return trip.payments.reduce((accoumulator, trip) => {
-            return accoumulator+trip.amount
+            return parseFloat(accoumulator)+parseFloat(trip.amount)
         }, 0);
     };
     const getTotalPaymentsInCAD = () => {
@@ -258,6 +258,11 @@ const AllTrips = (props) => {
                                                     // style="width: 80px;"
                                                     aria-label="Salary: activate to sort column ascending">Payment
                                                 </th>
+                                                <th className="sorting" tabIndex="0"
+                                                    aria-controls="datatables-reponsive" rowSpan="1" colSpan="1"
+                                                    // style="width: 80px;"
+                                                    aria-label="Salary: activate to sort column ascending">Factoring
+                                                </th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -312,6 +317,9 @@ const AllTrips = (props) => {
                                                    <td>
                                                        {getPayments(trip) > 0? `$ ${getPayments(trip)} `: `--`}
                                                    </td>
+                                                   <td>
+                                                       {trip.factoring && <CheckIcon />}
+                                                   </td>
                                                 </tr>
                                             })}
 
@@ -325,6 +333,7 @@ const AllTrips = (props) => {
                                                 <td >&nbsp;</td>
                                                 <td > ${number_format(getTripTotalInCAD())} (CAD) </td>
                                                 <td > ${number_format(getTripTotalInUSD())} (USD) </td>
+                                                <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
@@ -343,6 +352,7 @@ const AllTrips = (props) => {
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
+                                                <td > &nbsp; </td>
                                             </tr>
                                             <tr >
                                                 <td >&nbsp;</td>
@@ -353,6 +363,7 @@ const AllTrips = (props) => {
                                                 <td >&nbsp;</td>
                                                 <td >Total in (CAD)</td>
                                                 <td > ${number_format(getAllTripsTotalInCAD())} (CAD) </td>
+                                                <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
@@ -371,6 +382,7 @@ const AllTrips = (props) => {
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
+                                                <td > &nbsp; </td>
                                             </tr>
                                             <tr >
                                                 <td >&nbsp;</td>
@@ -381,6 +393,7 @@ const AllTrips = (props) => {
                                                 <td >Fuel/Repair paid by card (CAD)</td>
                                                 <td > ${number_format(getAllFuelInCAD())} (CAD) </td>
                                                 <td >${number_format( getAllTripsTotalInCAD() - getAllFuelInCAD() - getTotalUnitInstallmentAmount())} (CAD)</td>
+                                                <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
@@ -399,6 +412,7 @@ const AllTrips = (props) => {
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
+                                                <td > &nbsp; </td>
                                             </tr>
                                             <tr >
                                                 <td >&nbsp;</td>
@@ -409,6 +423,7 @@ const AllTrips = (props) => {
                                                 <td >Expenses in (CAD)</td>
                                                 <td > ${number_format(getAllExpensesInCAD())} (CAD) </td>
                                                 <td >${number_format(getAllTripsTotalInCAD() - getAllFuelInCAD() - getAllRepairInCAD() - getTotalUnitInstallmentAmount() - getAllExpensesInCAD())} (CAD)</td>
+                                                <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
@@ -427,6 +442,7 @@ const AllTrips = (props) => {
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
+                                                <td > &nbsp; </td>
                                             </tr>
                                             <tr >
                                                 <td >&nbsp;</td>
@@ -437,6 +453,7 @@ const AllTrips = (props) => {
                                                 <td >Payments in (CAD)</td>
                                                 <td > ${number_format(getTripPaymentInCAD())} (CAD) </td>
                                                 <td >&nbsp;</td>
+                                                <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
