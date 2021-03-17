@@ -11,22 +11,40 @@
 |
 */
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/new-trip', function () {
+        return view('trip');
+    });
+    Route::get('/trip/{id}', function () {
+        return view('trip');
+    });
+    Route::get('/trips', function () {
+        return view('trip');
+    });
 
-Route::get('/new-trip', function(){ return view('trip');});
-Route::get('/trip/{id}', function(){ return view('trip');});
-Route::get('/trips', function(){ return view('trip');});
-
-Route::get('/drivers', function(){ return view('trip');});
+    Route::get('/drivers', function () {
+        return view('trip');
+    });
 //---For Salary-----
-Route::get('/driver', function(){ return view('trip');});
-Route::get('/new-driver', function(){ return view('trip');});
-Route::get('/driver/{id}', function(){ return view('trip');});
+    Route::get('/driver', function () {
+        return view('trip');
+    });
+    Route::get('/new-driver', function () {
+        return view('trip');
+    });
+    Route::get('/driver/{id}', function () {
+        return view('trip');
+    });
 
 
-Route::get('/', function () {
-    return view('welcome');
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
+
+    Route::get('/home', 'HomeController@index')->name('home');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+

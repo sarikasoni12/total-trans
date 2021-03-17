@@ -5,6 +5,7 @@ import Trips from "./trips";
 import {domain} from './common/constants';
 import Driver from "./pages/driver";
 import Drivers from "./pages/drivers";
+import DriverForm from "./pages/driverForm";
 import NavBar from "./navBar";
 import Dashboard from "./dashboard";
 import Footer from "./footer";
@@ -25,6 +26,8 @@ const Page = () => {
         <Route exact={true} path={'/driver'} component={Driver}></Route>
         <Route exact={true} path={'/home'} component={Dashboard}></Route>
         <Route exact={true} path={'/drivers'} component={Drivers}></Route>
+        <Route exact={true} path={'/drivers'} component={Drivers}></Route>
+        <Route exact={true} path={'/new-driver'} component={DriverForm}></Route>
     </BrowserRouter>;
 };
 

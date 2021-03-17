@@ -21,7 +21,7 @@ const Search = (props) => {
     let [brokerId, setBrokerId] = useState('');
 
     useEffect( () => {
-        get(`/drivers`)
+        get(`/driver`)
             .then(res =>{
                 setDrivers(res);
             });
@@ -66,7 +66,7 @@ const Search = (props) => {
                             >
                                 <option value={""}> -- Driver -- </option>
                                 {drivers.map((driver) => {
-                                    return <option value={driver.id}>{driver.name}</option>
+                                    return <option value={driver.id}>{driver.first_name}</option>
                                 })}
                             </select>
                         {/*</div>*/}

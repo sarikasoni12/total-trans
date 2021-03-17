@@ -24,8 +24,8 @@ class TripRepository
 
         if(isset($search['driver_id']) && $search['driver_id'] > 0){
             $qry->where(function ($q) use($search){
-                $q->where('driver1', $search['driver_id'])
-                    ->orWhere('driver2', $search['driver_id']);
+                $q->where('driver1_id', $search['driver_id'])
+                    ->orWhere('driver2_id', $search['driver_id']);
             });
         }
         if(isset($search['truck_id'])){
@@ -124,7 +124,7 @@ class TripRepository
     {
         /** @var DriverRepository $driverRepo */
         $driverRepo = app(DriverRepository::class);
-        $driver = $driverRepo->getDriverById($driverId);
+        $driver = $driverRepo->getPayrollSettingsById($driverId);
 
         $data['trip_id'] = $trip->id;
         $data['trip_delivery_date'] = $trip->getDeliverDate();

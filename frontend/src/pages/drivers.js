@@ -20,7 +20,7 @@ const Driver = () => {
         //             setDrivers(res);
         //         });
         // } else if(queryString !== ''){
-            get(`/drivers`)
+            get(`/driver`)
                 .then(res =>{
                     setDrivers(res);
                 });
@@ -108,7 +108,7 @@ const Driver = () => {
                                             return <tr role="row" className="odd">
                                                 <td className="dtr-control sorting_1" tabIndex="0">
                                                     {/*<a href={"#"} onClick={() => editTrip(trip.id)}> */}
-                                                        {driver.name}
+                                                        {driver.first_name}
                                                     {/*</a>*/}
                                                 </td>
                                                 <td>{driver.cents_per_mile/100}</td>

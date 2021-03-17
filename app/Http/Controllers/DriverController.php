@@ -53,4 +53,10 @@ class DriverController extends Controller
         $drivers = $this->driverRepository->getAll();
         return new JsonResponse($drivers, 200);
     }
+
+    public function getPayrollSettings(): JsonResponse
+    {
+        $drivers = $this->driverRepository->getPayrollSettings();
+        return new JsonResponse($drivers, 200);
+    }
 }

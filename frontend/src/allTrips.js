@@ -298,7 +298,7 @@ const AllTrips = (props) => {
                                                        {trip.currency === 'USD' && `$ ${trip.price}`}
                                                    </td>
                                                    <td>
-                                                       {trip.driver1 && trip.driver1.name}/ {trip.driver2 && trip.driver2.name}
+                                                       {trip.driver1 && trip.driver1.first_name}/ {trip.driver2 && trip.driver2.first_name}
                                                    </td>
                                                    <td>
                                                        {(trip.invoice_date

@@ -5,12 +5,17 @@ import Checkbox from "./checkbox";
 const Drivers = (props) => {
 
     let [allDrivers, setAllDrivers] = useState([]);
+    let [settings, setSettings] = useState([]);
     useEffect(() => {
         if(allDrivers.length<=0)
         {
-            get('/drivers')
-                .then((res) => {
-                    setAllDrivers(res);
+            get('/driver')
+                .then((resDriver) => {
+                    get('/driver/payroll/settings')
+                        .then((res) => {
+                            setSettings(res);
+                            setAllDrivers(resDriver);
+                        });
                 });
         }
 
@@ -45,15 +50,19 @@ const Drivers = (props) => {
                 checked = true;
             }
 
+            let setting = settings.filter((s) => {
+                return s.driver_id == driver.id
+            });
+
             return <tr>
                 <td>
                     <input type="checkbox"
                             value={driver.id}
                             checked={checked}
-                            onChange={addDriver}/> {driver.name}
+                            onChange={addDriver}/> {driver.first_name}
                 </td>
-                <td><input type={"text"} className="form-control"/></td>
-                <td><input type={"text"} className="form-control" defaultValue={driver.cents_per_mile}/></td>
+                <td><input type={"text"} className="form-control" /></td>
+                <td><input type={"text"} className="form-control" defaultValue={setting[0].cents_per_mile}/></td>
             </tr>
         })}
         </table>

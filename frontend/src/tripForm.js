@@ -313,6 +313,7 @@ const TripForm = (props) => {
         </div>
         <Drivers drivers={drivers} addDriver={addDriver}/>
 
+
         <div className="form-row">
             <div className={'form-group col-md-2'}>
                 <label>Border crossings</label>

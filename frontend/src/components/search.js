@@ -44,7 +44,7 @@ const Search = (props) => {
                     <select name={'driver'} onChange={(e) => {setDriverId(e.target.value)}}>
                         <option value={""}> -- </option>
                         {drivers.map((driver) => {
-                            return <option value={driver.id}>{driver.name}</option>
+                            return <option value={driver.id}>{driver.first_name}</option>
                         })}
                     </select>
                 </div>
