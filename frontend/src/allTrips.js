@@ -318,7 +318,7 @@ const AllTrips = (props) => {
                                                        {getPayments(trip) > 0? `$ ${getPayments(trip)} `: `--`}
                                                    </td>
                                                    <td>
-                                                       {trip.factoring && <CheckIcon />}
+                                                       {trip.factoring_done && <CheckIcon />}
                                                    </td>
                                                 </tr>
                                             })}
