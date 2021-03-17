@@ -61,6 +61,16 @@ class TripModel extends Model
         return $this->hasOne(DriverModel::class, 'id', 'driver2_id');
     }
 
+    public function driver1Settings()
+    {
+        return $this->hasOne(DriverPayrollSettingsModel::class, 'driver_id', 'driver1_id');
+    }
+
+    public function driver2Settings()
+    {
+        return $this->hasOne(DriverPayrollSettingsModel::class, 'driver_id', 'driver2_id');
+    }
+
     public function payments()
     {
         return $this->hasMany(TripPaymentModel::class, 'trip_id', 'id');

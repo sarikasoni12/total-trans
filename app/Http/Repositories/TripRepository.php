@@ -103,17 +103,17 @@ class TripRepository
     public function getSalaryForAll(string $fromDate, string $endDate): array
     {
         $qry = TripModel::query()
-            ->with(['truck', 'trailer', 'broker', 'driver1', 'driver2', 'payments']);
+            ->with(['truck', 'trailer', 'broker', 'driver1', 'driver2', 'driver1Settings', 'driver2Settings', 'payments']);
         $qry->where('delivery_Date', '>=', $fromDate);
         $qry->where('delivery_Date','<=', $endDate);
 
         $trips = $qry->orderBy('pickup_date', 'asc')->get();
         $data = [];
         foreach ($trips as $trip){
-            if($trip->driver1->on_salary) {
+            if($trip->driver1Settings->on_salary) {
                 $data[] = $this->getSalaryForTripByDriverId($trip->driver1_id, $trip);
             }
-            if($trip->driver2 && $trip->driver2->on_salary){
+            if($trip->driver2 && $trip->driver2Settings->on_salary){
                 $data[] = $this->getSalaryForTripByDriverId($trip->driver2_id, $trip);
             }
         }
@@ -131,7 +131,7 @@ class TripRepository
 
         /** @var DriverModel $driver */
 
-        $data['driver_id'] = $trip->driver1;
+        $data['driver_id'] = $driverId;
         $data['amount_on_miles'] = round(($trip->miles * ($driver->cents_per_mile/100)),2);
         $data['border_crossing_fee'] = $trip->border_crossing_no * $driver->border_crossing_fee;
         $data['layover_fee'] = $trip->layover * $driver->layover_fee;
