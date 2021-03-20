@@ -26,7 +26,7 @@ const Drivers = (props) => {
     }
 
     const getDriverSettingById = (driverId) => {
-        return settings.filter(item => item.driver_id === driverId);
+        return settings.filter(item => parseInt(item.driver_id) === parseInt(driverId));
     }
 
     const getSelectedDriverIds = () => {
