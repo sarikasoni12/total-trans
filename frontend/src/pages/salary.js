@@ -29,7 +29,7 @@ const Salary = () => {
 
     const getTotalMiles = () => {
         return trips.reduce((accumulator, trip) => {
-            return accumulator + trip.miles;
+            return parseInt(accumulator) + parseInt(trip.miles);
         }, 0)
     }
     const getTotalAmountOnMiles = () => {
