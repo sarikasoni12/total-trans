@@ -27,6 +27,11 @@ const Salary = () => {
         }
     }, [searchParam]);
 
+    const getTotalMiles = () => {
+        return trips.reduce((accumulator, trip) => {
+            return accumulator + trip.miles;
+        }, 0)
+    }
     const getTotalAmountOnMiles = () => {
         return trips.reduce((accumulator, trip) => {
             return accumulator + trip.amount_on_miles;
@@ -161,7 +166,7 @@ const Salary = () => {
                                         <tr className={'divRow'}>
                                             <td className="divCell">&nbsp;</td>
                                             <td className="divCell">&nbsp;</td>
-                                            <td className="divCell">&nbsp;</td>
+                                            <td className="divCell">{getTotalMiles()}</td>
                                             <td className="divCell">&nbsp;</td>
                                             <td className="divCell">$ {number_format(getTotalAmountOnMiles(), 2)}</td>
                                             <td className="divCell">$ {number_format(getTotalBorderCrossingFee(), 2)}</td>
