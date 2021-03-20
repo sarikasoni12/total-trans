@@ -21,16 +21,54 @@ const Drivers = (props) => {
 
     }, []);
 
+    const getSelectedDriverById = (driverId) => {
+        return props.selectedDrivers.filter(item => item.driver_id === driverId);
+    }
 
-    const addDriver = (e) => {
-        let driver = parseInt(e.target.value);
-        let propDrivers = [...props.drivers];
-        let index = propDrivers.indexOf(driver);
+    const getDriverSettingById = (driverId) => {
+        return settings.filter(item => item.driver_id === driverId);
+    }
+
+    const getSelectedDriverIds = () => {
+        return props.selectedDrivers.map(item => item.driver_id);
+    }
+
+    const addDriver = (driverId) => {
+        let driverIds = props.selectedDrivers.map(item => item.driver_id);
+        let index = driverIds.indexOf(driverId);
         if (index === -1) {
-            props.addDriver([...propDrivers, driver]);
+            let data = {'driver_id': driverId}
+            let tmpDriver = getDriverSettingById(driverId);
+            data['cents_per_mile'] = parseInt(tmpDriver[0].cents_per_mile);
+            props.addSelectedDrivers([...props.selectedDrivers, data])
         } else {
+            let propDrivers = [...props.selectedDrivers];
             propDrivers.splice(index, 1);
-            props.addDriver(propDrivers);
+            props.addSelectedDrivers(propDrivers);
+        }
+    }
+
+    const selectDriver = (e, key, driverId) => {
+        if(Object.keys(props.selectedDrivers).length > 0){
+            let driverIds = props.selectedDrivers.map(item => item.driver_id);
+            let index = driverIds.indexOf(driverId);
+            if (index === -1) {
+                let data = {'driver_id': driverId}
+                data[key] = parseInt(e.target.value);
+                props.addSelectedDrivers([...props.selectedDrivers, data])
+            } else {
+                let data = [...props.selectedDrivers];
+                data.map(item => {
+                    if(item.driver_id === driverId){
+                        item[key] = parseInt(e.target.value)
+                    }
+                });
+                props.addSelectedDrivers(data);
+            }
+        } else {
+            let data = {'driver_id': driverId}
+            data[key] = parseInt(e.target.value);
+            props.addSelectedDrivers([data]);
         }
     }
 
@@ -44,25 +82,39 @@ const Drivers = (props) => {
             </tr>
 
         {allDrivers.map((driver) => {
-            let index = props.drivers.indexOf(driver.id);
+            let driverIds = getSelectedDriverIds();
             let checked = false;
-            if (index !== -1) {
+            if (driverIds.indexOf(driver.id) !== -1) {
                 checked = true;
             }
 
-            let setting = settings.filter((s) => {
-                return s.driver_id == driver.id
-            });
+            let setting = getDriverSettingById(driver.id);
+            let selectedDriver = getSelectedDriverById(driver.id);
 
             return <tr>
                 <td>
                     <input type="checkbox"
                             value={driver.id}
                             checked={checked}
-                            onChange={addDriver}/> {driver.first_name}
+                            onChange={(e)=>{addDriver(driver.id)}}/> {driver.first_name}
                 </td>
-                <td><input type={"text"} className="form-control" /></td>
-                <td><input type={"text"} className="form-control" defaultValue={setting[0].cents_per_mile}/></td>
+                <td><input
+                    type={"text"}
+                    className="form-control"
+                    onChange={(e)=>{selectDriver(e, 'miles', driver.id)}}
+                    disabled={!checked}
+                    value={selectedDriver.length > 0? selectedDriver[0].miles: ''}
+                /></td>
+                <td>
+                    <input
+                        type={"text"}
+                        className="form-control"
+                        defaultValue={setting[0].cents_per_mile}
+                        value={selectedDriver.length > 0? selectedDriver[0].cents_per_mile: setting[0].cents_per_mile}
+                        onChange={(e)=>{selectDriver(e, 'cents_per_mile', driver.id)}}
+                        disabled={!checked}
+                    />
+                </td>
             </tr>
         })}
         </table>

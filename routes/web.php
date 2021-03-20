@@ -26,7 +26,7 @@ Route::middleware(['auth'])->group(function () {
         return view('trip');
     });
 //---For Salary-----
-    Route::get('/driver', function () {
+    Route::get('/salary', function () {
         return view('trip');
     });
     Route::get('/new-driver', function () {

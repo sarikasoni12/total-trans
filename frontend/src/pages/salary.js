@@ -5,7 +5,7 @@ import CheckIcon from "../Elements/CheckIcon";
 import Button from "../Elements/Button";
 import {formatDate, number_format} from "../common/formatting";
 
-const Driver = () => {
+const Salary = () => {
     const [trips, setTrips] = useState([]);
     const [searchParam, setSearchParam] = useState([]);
 
@@ -106,6 +106,11 @@ const Driver = () => {
                                             <th className="sorting" tabIndex="0"
                                                 aria-controls="datatables-reponsive" rowSpan="1" colSpan="1"
                                                 // style="width: 112px;"
+                                                aria-label="Office: activate to sort column ascending">Cents/ Mile
+                                            </th>
+                                            <th className="sorting" tabIndex="0"
+                                                aria-controls="datatables-reponsive" rowSpan="1" colSpan="1"
+                                                // style="width: 112px;"
                                                 aria-label="Office: activate to sort column ascending">Amount on miles
                                             </th>
                                             <th className="sorting" tabIndex="0"
@@ -179,4 +184,4 @@ const Driver = () => {
     </div>
 };
 
-export default Driver;
+export default Salary;

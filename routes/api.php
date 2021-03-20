@@ -33,12 +33,15 @@ Route::middleware([])->group(function () {
 //Route::get('/drivers', ['uses' =>  "\App\Http\Controllers\TeamController@getDrivers"]);
 
     Route::get('/trips', ['uses' => "\App\Http\Controllers\TripController@getAll"]);
+
     Route::prefix('trip')->group(function () {
         Route::post('/', ['uses' => "\App\Http\Controllers\TripController@saveTrip"]);
         Route::get('/{id}', ['uses' => "\App\Http\Controllers\TripController@getById"]);
         Route::post('/{trip_id}/upload-documents', ['uses' => "\App\Http\Controllers\TripController@uploadDocuments"]);
         Route::post('/{trip_id}/address/{address_type}', ['uses' => "\App\Http\Controllers\TripController@saveAddress"]);
+        Route::get('/{trip_id}/drivers', ['uses' => "\App\Http\Controllers\TripController@getDrivers"]);
         Route::post('/{trip_id}/drivers', ['uses' => "\App\Http\Controllers\TripController@saveDrivers"]);
+
         Route::get('/{trip_id}/document/{id}', ['uses' => "\App\Http\Controllers\TripDocumentController@get"]);
         Route::get('/{id}/invoice/generate', ['uses' => "\App\Http\Controllers\InvoiceController@generate"]);
         Route::get('/{id}/invoice', ['uses' => "\App\Http\Controllers\InvoiceController@get"]);

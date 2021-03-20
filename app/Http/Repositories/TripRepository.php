@@ -4,6 +4,7 @@ namespace App\Http\Repositories;
 
 use App\Models\DriverModel;
 use App\Models\TripDocumentModel;
+use App\Models\TripDriverModel;
 use App\Models\TripModel;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -83,7 +84,7 @@ class TripRepository
     public function getDriverSalary(int $driverId, string $fromDate, string $endDate): array
     {
         $qry = TripModel::query()
-            ->with(['truck', 'trailer', 'broker', 'driver1', 'driver2', 'payments']);
+            ->with(['truck', 'trailer', 'broker', 'driver1', 'driver2', 'payments', 'driver1Settings', 'driver2Settings']);
         $qry->where('delivery_Date', '>=', $fromDate);
         $qry->where('delivery_Date','<=', $endDate);
 
@@ -113,8 +114,10 @@ class TripRepository
             if($trip->driver1Settings->on_salary) {
                 $data[] = $this->getSalaryForTripByDriverId($trip->driver1_id, $trip);
             }
-            if($trip->driver2 && $trip->driver2Settings->on_salary){
-                $data[] = $this->getSalaryForTripByDriverId($trip->driver2_id, $trip);
+            if($trip->driver2Settings !== null){
+                if($trip->driver2Settings->on_salary){
+                    $data[] = $this->getSalaryForTripByDriverId($trip->driver2_id, $trip);
+                }
             }
         }
         return $data;
@@ -138,5 +141,34 @@ class TripRepository
         $data['pickup_delivery_fee'] = $trip->pickup_delivery_no * $driver->pickup_delivery_fee;
         $data['waiting_hours_fee'] = $trip->waiting_hours * $driver->waiting_fee;
         return $data;
+    }
+
+    public function saveTripDrivers(int $tripId, array $data)
+    {
+        $driver = TripDriverModel::query()
+            ->where('trip_id', $tripId)
+            ->where('driver_id', $data['driver_id'])
+            ->first();
+        if($driver){
+            $driver->update($data);
+        } else {
+            $m = new TripDriverModel(array_merge(['trip_id' => $tripId], $data));
+            $m->save();
+        }
+    }
+
+    public function deleteDriversExcept(int $tripId, array $driverIds)
+    {
+        return TripDriverModel::query()
+            ->where('trip_id', $tripId)
+            ->whereNotIn('driver_id', $driverIds)
+            ->delete();
+    }
+
+    public function getDrivers(int $tripId)
+    {
+      return TripDriverModel::query()
+          ->where('trip_id', $tripId)
+          ->get(['driver_id', 'cents_per_mile', 'miles']);
     }
 }

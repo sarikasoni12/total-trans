@@ -7,7 +7,7 @@ import {formatDate} from './common/formatting';
 import UploadFiles from "./components/UploadFiles";
 import axios from "axios";
 import Address from "./components/address";
-import Driver from "./pages/driver";
+import Salary from "./pages/salary";
 import Drivers from "./components/drivers";
 import Brokers from "./components/brokers";
 import Trucks from "./components/trucks";
@@ -30,6 +30,7 @@ const TripForm = (props) => {
     let [truck, setTruck] = useState('');
     let [trailer, setTrailer] = useState('');
     let [drivers, setDrivers] = useState([]);
+    let [selectedDrivers, setSelectedDrivers] = useState([]);
     let [trailerOther, setTrailerOther] = useState('');
 
     //-----LOCATIONS
@@ -92,8 +93,8 @@ const TripForm = (props) => {
             price: price,
             currency: currency,
             conversion_rate: conversionRate,
-            driver1_id: drivers[0] !== undefined ? drivers[0] : null,
-            driver2_id: drivers[1] !== undefined ? drivers[1] : null,
+            driver1_id: selectedDrivers[0] !== undefined ? selectedDrivers[0].driver_id : null,
+            driver2_id: selectedDrivers[1] !== undefined ? selectedDrivers[1] .driver_id: null,
             uploads: uploads,
             border_crossing_no: borderCrossingNo,
             layover: layover,
@@ -108,11 +109,11 @@ const TripForm = (props) => {
         };
         post(`/trip`, data)
             .then(trip => {
-                saveAddress(trip.id, 'shipper', shipperAddress)
+                saveDrivers(trip.id)
                     .then(res => {
-                        saveAddress(res.trip_id, 'consignee', consigneeAddress)
+                        saveAddress(res.trip_id, 'shipper', shipperAddress)
                             .then(res => {
-                                saveDrivers(res.trip_id, drivers)
+                                saveAddress(res.trip_id, 'consignee', consigneeAddress)
                                     .then(res => {
                                         uploadDocuments(res.trip_id)
                                     })
@@ -137,8 +138,8 @@ const TripForm = (props) => {
             .then(res => res);
     }
 
-    const saveDrivers = (tripId, drivers) => {
-        return post(`/trip/${tripId}/drivers`, drivers)
+    const saveDrivers = (tripId) => {
+        return post(`/trip/${tripId}/drivers`, selectedDrivers)
             .then(res => res);
     }
 
@@ -156,6 +157,10 @@ const TripForm = (props) => {
 
     const addDriver = (newDrivers) => {
          setDrivers(newDrivers);
+    }
+
+    const addSelectedDrivers = (newDrivers) => {
+        setSelectedDrivers(newDrivers);
     }
 
     const addBroker = (newBrokerId) => {
@@ -202,14 +207,18 @@ const TripForm = (props) => {
                     setPoOrderDate(poOrderDate)
                     setUploads(res.documents);
 
-                    let driversTemp = [];
-                    if(res.driver1_id){
-                        driversTemp[driversTemp.length] = parseInt(res.driver1_id);
-                    }
-                    if(res.driver2_id){
-                        driversTemp[driversTemp.length] = parseInt(res.driver2_id);
-                    }
-                    setDrivers(driversTemp);
+                    get(`/trip/${tripId}/drivers`)
+                        .then(res => {
+                            setSelectedDrivers(res);
+                        })
+                    // let driversTemp = [];
+                    // if(res.driver1_id){
+                    //     driversTemp[driversTemp.length] = parseInt(res.driver1_id);
+                    // }
+                    // if(res.driver2_id){
+                    //     driversTemp[driversTemp.length] = parseInt(res.driver2_id);
+                    // }
+                    // setDrivers(driversTemp);
                 });
         }
 
@@ -311,7 +320,7 @@ const TripForm = (props) => {
                 </div>
             }
         </div>
-        <Drivers drivers={drivers} addDriver={addDriver}/>
+        <Drivers drivers={drivers} selectedDrivers={selectedDrivers} addDriver={addDriver} addSelectedDrivers={addSelectedDrivers}/>
 
 
         <div className="form-row">

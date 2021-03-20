@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Repositories\TripAddressRepository;
-use App\Http\Repositories\TripDocumentRepository;
 use App\Http\Repositories\TripRepository;
 use App\Models\TripModel;
 use Illuminate\Support\Facades\Storage;
@@ -108,6 +107,23 @@ class TripController extends Controller
     public function saveDrivers(Request $request, $tripId)
     {
         $tripId = (int)$tripId;
+        $data = $request->request->all();
+
+        $driverIds = array_map(function ($item){
+            return $item['driver_id'];
+        }, $data);
+        foreach ($data as $item){
+            $this->tripRepository->saveTripDrivers($tripId, $item);
+        }
+
+        $this->tripRepository->deleteDriversExcept($tripId, $driverIds);
         return new JsonResponse(['trip_id' => $tripId], 200);
+    }
+    public function getDrivers(Request $request, $tripId)
+    {
+        $tripId = (int)$tripId;
+        $drivers = $this->tripRepository->getDrivers($tripId);
+
+        return new JsonResponse($drivers, 200);
     }
 }

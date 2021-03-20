@@ -3,7 +3,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import TripForm from "./tripForm";
 import Trips from "./trips";
 import {domain} from './common/constants';
-import Driver from "./pages/driver";
+import Salary from "./pages/salary";
 import Drivers from "./pages/drivers";
 import DriverForm from "./pages/driverForm";
 import NavBar from "./navBar";
@@ -23,7 +23,7 @@ const Page = () => {
         <Route exact={true} path={'/new-trip'} component={TripForm}></Route>
         <Route exact={true} path={'/trip/:id'} component={TripForm}></Route>
         <Route exact={true} path={'/trips'} component={AllTrips}></Route>
-        <Route exact={true} path={'/driver'} component={Driver}></Route>
+        <Route exact={true} path={'/salary'} component={Salary}></Route>
         <Route exact={true} path={'/home'} component={Dashboard}></Route>
         <Route exact={true} path={'/drivers'} component={Drivers}></Route>
         <Route exact={true} path={'/drivers'} component={Drivers}></Route>

@@ -67,13 +67,13 @@ const NavBar = () => {
                                            <span className="align-middle">
                                                 Trips</span>
                                        </a>
-                                       <ul id="pages" className="sidebar-dropdown list-unstyled collapse "
-                                           data-parent="#sidebar">
-                                           <li className="sidebar-item"><a className="sidebar-link"
-                                                                           href="pages-profile.html">Add New</a></li>
-                                           <li className="sidebar-item"><a className="sidebar-link"
-                                                                           href="pages-settings.html">List All</a></li>
-                                       </ul>
+                                       {/*<ul id="pages" className="sidebar-dropdown list-unstyled collapse "*/}
+                                       {/*    data-parent="#sidebar">*/}
+                                       {/*    <li className="sidebar-item"><a className="sidebar-link"*/}
+                                       {/*                                    href="pages-profile.html">Add New</a></li>*/}
+                                       {/*    <li className="sidebar-item"><a className="sidebar-link"*/}
+                                       {/*                                    href="pages-settings.html">List All</a></li>*/}
+                                       {/*</ul>*/}
                                    </li>
                                    <li className="sidebar-item">
                                        <a href="#drivers" data-toggle="collapse" className="sidebar-link collapsed">
@@ -93,7 +93,7 @@ const NavBar = () => {
                                        <ul id="drivers" className="sidebar-dropdown list-unstyled collapse "
                                            data-parent="#sidebar">
                                            <li className="sidebar-item"><a className="sidebar-link"
-                                                                           href="/driver">Salary</a></li>
+                                                                           href="/salary">Salary</a></li>
                                            <li className="sidebar-item"><a className="sidebar-link"
                                                                            href="/drivers">List All</a></li>
                                        </ul>
