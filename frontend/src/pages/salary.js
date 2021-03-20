@@ -96,12 +96,17 @@ const Salary = () => {
                                                 aria-controls="datatables-reponsive" rowSpan="1" colSpan="1"
                                                 // style="width: 155px;"
                                                 aria-sort="ascending"
-                                                aria-label="Name: activate to sort column descending">ID#
+                                                aria-label="Name: activate to sort column descending">Trip ID#
                                             </th>
                                             <th className="sorting" tabIndex="0"
                                                 aria-controls="datatables-reponsive" rowSpan="1" colSpan="1"
                                                 // style="width: 237px;"
                                                 aria-label="Position: activate to sort column ascending">Dates#
+                                            </th>
+                                            <th className="sorting" tabIndex="0"
+                                                aria-controls="datatables-reponsive" rowSpan="1" colSpan="1"
+                                                // style="width: 237px;"
+                                                aria-label="Position: activate to sort column ascending">Miles
                                             </th>
                                             <th className="sorting" tabIndex="0"
                                                 aria-controls="datatables-reponsive" rowSpan="1" colSpan="1"
@@ -142,6 +147,7 @@ const Salary = () => {
                                                     <a href={"#"} onClick={() => editTrip(trip.id)}> {trip.trip_id}</a>
                                                 </td>
                                                 <td>{trip.trip_delivery_date}</td>
+                                                <td>{trip.miles}</td>
                                                 <td>{trip.cents_per_mile}</td>
                                                 <td> $ {number_format(trip.amount_on_miles, 2)} </td>
                                                 <td> $ {trip.border_crossing_fee} </td>
@@ -156,6 +162,7 @@ const Salary = () => {
                                             <td className="divCell">&nbsp;</td>
                                             <td className="divCell">&nbsp;</td>
                                             <td className="divCell">&nbsp;</td>
+                                            <td className="divCell">&nbsp;</td>
                                             <td className="divCell">$ {number_format(getTotalAmountOnMiles(), 2)}</td>
                                             <td className="divCell">$ {number_format(getTotalBorderCrossingFee(), 2)}</td>
                                             <td className="divCell">$ {number_format(getTotalLayover(), 2)}</td>
@@ -163,6 +170,7 @@ const Salary = () => {
                                             <td className="divCell">$ {number_format(getTotalWaitingFee(), 2)}</td>
                                         </tr>
                                         <tr className={'divRow'}>
+                                            <td className="divCell">&nbsp;</td>
                                             <td className="divCell">&nbsp;</td>
                                             <td className="divCell">&nbsp;</td>
                                             <td className="divCell">&nbsp;</td>

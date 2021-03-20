@@ -136,6 +136,7 @@ class TripRepository
 
         $data['driver_id'] = $driverId;
         $data['cents_per_mile'] = $driver->cents_per_mile;
+        $data['miles'] = $trip->miles;
         $data['amount_on_miles'] = round(($trip->miles * ($driver->cents_per_mile/100)),2);
         $data['border_crossing_fee'] = $trip->border_crossing_no * $driver->border_crossing_fee;
         $data['layover_fee'] = $trip->layover * $driver->layover_fee;
