@@ -142,6 +142,7 @@ const Salary = () => {
                                                     <a href={"#"} onClick={() => editTrip(trip.id)}> {trip.trip_id}</a>
                                                 </td>
                                                 <td>{trip.trip_delivery_date}</td>
+                                                <td>{trip.cents_per_mile}</td>
                                                 <td> $ {number_format(trip.amount_on_miles, 2)} </td>
                                                 <td> $ {trip.border_crossing_fee} </td>
                                                 <td> $ {trip.layover_fee} </td>
@@ -154,6 +155,7 @@ const Salary = () => {
                                         <tr className={'divRow'}>
                                             <td className="divCell">&nbsp;</td>
                                             <td className="divCell">&nbsp;</td>
+                                            <td className="divCell">&nbsp;</td>
                                             <td className="divCell">$ {number_format(getTotalAmountOnMiles(), 2)}</td>
                                             <td className="divCell">$ {number_format(getTotalBorderCrossingFee(), 2)}</td>
                                             <td className="divCell">$ {number_format(getTotalLayover(), 2)}</td>
@@ -161,6 +163,7 @@ const Salary = () => {
                                             <td className="divCell">$ {number_format(getTotalWaitingFee(), 2)}</td>
                                         </tr>
                                         <tr className={'divRow'}>
+                                            <td className="divCell">&nbsp;</td>
                                             <td className="divCell">&nbsp;</td>
                                             <td className="divCell">&nbsp;</td>
                                             <td className="divCell">$ {number_format(getTotalSalary(), 2)}</td>
