@@ -91,6 +91,7 @@ const TripForm = (props) => {
             miles: miles,
             broker_id: brokerId,
             price: price,
+            invoice_price: price,
             currency: currency,
             conversion_rate: conversionRate,
             driver1_id: selectedDrivers[0] !== undefined ? selectedDrivers[0].driver_id : null,
