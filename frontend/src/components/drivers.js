@@ -22,7 +22,7 @@ const Drivers = (props) => {
     }, []);
 
     const getSelectedDriverById = (driverId) => {
-        return props.selectedDrivers.filter(item => item.driver_id === driverId);
+        return props.selectedDrivers.filter(item => parseInt(item.driver_id) === parseInt(driverId));
     }
 
     const getDriverSettingById = (driverId) => {
@@ -30,11 +30,11 @@ const Drivers = (props) => {
     }
 
     const getSelectedDriverIds = () => {
-        return props.selectedDrivers.map(item => item.driver_id);
+        return props.selectedDrivers.map(item => parseInt(item.driver_id));
     }
 
     const addDriver = (driverId) => {
-        let driverIds = props.selectedDrivers.map(item => item.driver_id);
+        let driverIds = getSelectedDriverIds();
         let index = driverIds.indexOf(driverId);
         if (index === -1) {
             let data = {'driver_id': driverId}
@@ -50,7 +50,7 @@ const Drivers = (props) => {
 
     const selectDriver = (e, key, driverId) => {
         if(Object.keys(props.selectedDrivers).length > 0){
-            let driverIds = props.selectedDrivers.map(item => item.driver_id);
+            let driverIds = getSelectedDriverIds();
             let index = driverIds.indexOf(driverId);
             if (index === -1) {
                 let data = {'driver_id': driverId}
