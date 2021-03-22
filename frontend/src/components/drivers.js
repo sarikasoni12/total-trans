@@ -59,7 +59,7 @@ const Drivers = (props) => {
             } else {
                 let data = [...props.selectedDrivers];
                 data.map(item => {
-                    if(item.driver_id === driverId){
+                    if(parseInt(item.driver_id) === parseInt(driverId)){
                        return {...item, key: parseInt(e.target.value)}
                     }
                 });
