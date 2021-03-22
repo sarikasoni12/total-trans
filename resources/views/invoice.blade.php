@@ -41,7 +41,7 @@
                 <td class="right-card">
                     <table>
                         <tr><td class="bold-text">Invoice #</td></tr>
-                        <tr><td>{{($trip->invoice_number!='' && $trip->invoice_number != null)? $trip->invoice_number : $invoice_number->last_invoice_number+1}}</td></tr>
+                        <tr><td>{{($trip->invoice_number!='' && $trip->invoice_number != null)? $trip->invoice_number : $invoice_number}}</td></tr>
                         <tr><td class="bold-text">Date</td></tr>
                         <tr><td>{{date('m/d/Y')}}</td></tr>
                         <tr><td class="bold-text">Invoice Due Date</td></tr>

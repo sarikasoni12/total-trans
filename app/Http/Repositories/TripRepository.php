@@ -173,4 +173,12 @@ class TripRepository
           ->where('trip_id', $tripId)
           ->get(['driver_id', 'cents_per_mile', 'miles']);
     }
+
+    public function updateTripInvoiceNumber(int $tripId, int $invoiceNumber):int
+    {
+        return TripModel::query()->where('id', $tripId)->update([
+            'invoice_number' => $invoiceNumber,
+            'invoice_date' => NOW()
+        ]);
+    }
 }

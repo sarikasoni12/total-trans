@@ -6,6 +6,7 @@ import {defaultConversionRate} from './common/constants';
 import Search from "./search";
 import CheckIcon from "./Elements/CheckIcon";
 import Button from "./Elements/Button";
+import InvoiceButton from "./ui/invoiceButton";
 
 const AllTrips = (props) => {
     const [trips, setTrips] = useState([]);
@@ -312,7 +313,11 @@ const AllTrips = (props) => {
 
                                                        {(!trip.invoice_date
                                                            || !trip.invoice_number)
-                                                       && <a href={`/api/trip/${trip.id}/invoice/generate`} target={"_blank"}><button className="btn btn-info"> Invoice  </button></a>}
+                                                       && <InvoiceButton trip_id={trip.id}/>
+                                                       // <a href={`/api/trip/${trip.id}/invoice/generate`} target={"_blank"}>
+                                                       //     {/*<button className="btn btn-info"> Invoice  </button>*/}
+                                                       // </a>
+                                                       }
                                                    </td>
                                                    <td>
                                                        {getPayments(trip) > 0? `$ ${getPayments(trip)} `: `--`}

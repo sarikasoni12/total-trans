@@ -8,6 +8,7 @@ use App\Models\InvoiceNumberModel;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Spipu\Html2Pdf\Html2Pdf;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 
@@ -31,7 +32,7 @@ class InvoiceController
         $this->tripDocumentRepository = $tripDocumentRepository;
     }
 
-    public function generate(Request $request, $tripId)
+    public function preview(Request $request, $tripId)
     {
         $tripId = (int)$tripId;
         $trip = $this->tripRepository->getByIdForInvoice($tripId);
@@ -40,7 +41,7 @@ class InvoiceController
         $data = [
             'trip' => $trip,
             'company' => $company,
-            'invoice_number' => $invoiceNumber
+            'invoice_number' => $invoiceNumber->last_invoice_number+1
         ];
         $html = view('invoice', $data)->render();
 
@@ -56,18 +57,8 @@ class InvoiceController
         $html2pdf->writeHTML($styledHtml);
         $invoiceName = "trip-$tripId-invoice.pdf";
         $html2pdf->output($invoiceName, 'I');
-//        Storage::disk('local')->put($invoiceName, $invoice);
-
-//        $documents = $this->tripDocumentRepository->getDocument($tripId);
-//        $names = $documents->pluck('name')->toArray();
-//        $path = storage_path().'/'.'app'.'/'.$names[0];
-//        if (file_exists($path)) {
-//            return response()->download($path);
-//        }
-//
-//        $zip = new \ZipArchive();
     }
-    public function get(Request $request, $tripId)
+    public function generate(Request $request, $tripId)
     {
         $tripId = (int)$tripId;
         $trip = $this->tripRepository->getByIdForInvoice($tripId);
@@ -76,9 +67,9 @@ class InvoiceController
         $data = [
             'trip' => $trip,
             'company' => $company,
-            'invoice_number' => $invoiceNumber,
+            'invoice_number' => $invoiceNumber->last_invoice_number+1,
         ];
-        return view('invoice', $data)->render();
+        $html = view('invoice', $data)->render();
 
         $cssToInlineStyles = new CssToInlineStyles();
         $css = file_get_contents(__DIR__ . '/../../../public/css/invoice.css');
@@ -90,6 +81,18 @@ class InvoiceController
 
         $html2pdf = new Html2Pdf();
         $html2pdf->writeHTML($styledHtml);
-        $html2pdf->output();
+        $invoiceName = "trip-$tripId-invoice.pdf";
+
+        $updated = $this->tripRepository->updateTripInvoiceNumber($tripId, $invoiceNumber->last_invoice_number+1);
+        if($updated){
+            InvoiceNumberModel::query()->where('company_id', 1)->increment('last_invoice_number');
+            $html2pdf->output($invoiceName, 'D');
+        }
+    }
+
+    public function getNextInvoiceNumber()
+    {
+        $invoiceNumber = InvoiceNumberModel::query()->where('company_id', 1)->first();
+        return new JsonResponse(['next_invoice_number' => $invoiceNumber->last_invoice_number+1], 200);
     }
 }

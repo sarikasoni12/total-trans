@@ -43,6 +43,8 @@ Route::middleware([])->group(function () {
         Route::post('/{trip_id}/drivers', ['uses' => "\App\Http\Controllers\TripController@saveDrivers"]);
 
         Route::get('/{trip_id}/document/{id}', ['uses' => "\App\Http\Controllers\TripDocumentController@get"]);
+        Route::get('/{id}/invoice/next-number', ['uses' => "\App\Http\Controllers\InvoiceController@getNextInvoiceNumber"]);
+        Route::get('/{id}/invoice/preview', ['uses' => "\App\Http\Controllers\InvoiceController@preview"]);
         Route::get('/{id}/invoice/generate', ['uses' => "\App\Http\Controllers\InvoiceController@generate"]);
         Route::get('/{id}/invoice', ['uses' => "\App\Http\Controllers\InvoiceController@get"]);
     });
