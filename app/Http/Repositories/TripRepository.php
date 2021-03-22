@@ -127,17 +127,18 @@ class TripRepository
     {
         /** @var DriverRepository $driverRepo */
         $driverRepo = app(DriverRepository::class);
-        $driver = $driverRepo->getPayrollSettingsById($driverId);
+        $driver = $driverRepo->getDriverById($driverId);
+        $tripDriver = $this->getTripDriverById($trip->id, $driverId);
 
         $data['trip_id'] = $trip->id;
         $data['trip_delivery_date'] = $trip->getDeliverDate();
 
-        /** @var DriverModel $driver */
+        /** @var TripDriverModel $driver */
 
         $data['driver_id'] = $driverId;
-        $data['cents_per_mile'] = $driver->cents_per_mile;
-        $data['miles'] = $trip->miles;
-        $data['amount_on_miles'] = round(($trip->miles * ($driver->cents_per_mile/100)),2);
+        $data['cents_per_mile'] = $tripDriver->cents_per_mile;
+        $data['miles'] = $tripDriver->miles;
+        $data['amount_on_miles'] = round(($tripDriver->miles * ($tripDriver->cents_per_mile/100)),2);
         $data['border_crossing_fee'] = $trip->border_crossing_no * $driver->border_crossing_fee;
         $data['layover_fee'] = $trip->layover * $driver->layover_fee;
         $data['pickup_delivery_fee'] = $trip->pickup_delivery_no * $driver->pickup_delivery_fee;
@@ -180,5 +181,13 @@ class TripRepository
             'invoice_number' => $invoiceNumber,
             'invoice_date' => NOW()
         ]);
+    }
+
+    public function getTripDriverById(int $tripId, int $driverId)
+    {
+        return TripDriverModel::query()
+            ->when('trip_id', $tripId)
+            ->when('driver_id', $driverId)
+            ->first();
     }
 }
