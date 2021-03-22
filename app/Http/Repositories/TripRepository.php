@@ -186,8 +186,8 @@ class TripRepository
     public function getTripDriverById(int $tripId, int $driverId)
     {
         return TripDriverModel::query()
-            ->when('trip_id', $tripId)
-            ->when('driver_id', $driverId)
+            ->where('trip_id', $tripId)
+            ->where('driver_id', $driverId)
             ->first();
     }
 }
