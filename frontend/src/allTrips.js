@@ -251,12 +251,12 @@ const AllTrips = (props) => {
                                                 <th className="sorting" tabIndex="0"
                                                     aria-controls="datatables-reponsive" rowSpan="1" colSpan="1"
                                                     // style="width: 80px;"
-                                                    aria-label="Salary: activate to sort column ascending">Price(CAD)
+                                                    aria-label="Salary: activate to sort column ascending">Price<br/>(CAD)
                                                 </th>
                                                 <th className="sorting" tabIndex="0"
                                                     aria-controls="datatables-reponsive" rowSpan="1" colSpan="1"
                                                     // style="width: 80px;"
-                                                    aria-label="Salary: activate to sort column ascending">Price(USD)
+                                                    aria-label="Salary: activate to sort column ascending">Price<br/>(USD)
                                                 </th>
                                                 <th className="sorting" tabIndex="0"
                                                     aria-controls="datatables-reponsive" rowSpan="1" colSpan="1"
@@ -271,7 +271,7 @@ const AllTrips = (props) => {
                                                 <th className="sorting" tabIndex="0"
                                                     aria-controls="datatables-reponsive" rowSpan="1" colSpan="1"
                                                     // style="width: 80px;"
-                                                    aria-label="Salary: activate to sort column ascending">Payment
+                                                    aria-label="Salary: activate to sort column ascending">Paid
                                                 </th>
                                                 <th className="sorting" tabIndex="0"
                                                     aria-controls="datatables-reponsive" rowSpan="1" colSpan="1"
