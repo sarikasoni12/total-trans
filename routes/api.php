@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::middleware([])->group(function () {
 
     Route::prefix('driver')->group(function () {
+        Route::get('/salary', ['uses' => "\App\Http\Controllers\DriverController@getSalaryForAll"]);
         Route::get('/', ['uses' => "\App\Http\Controllers\DriverController@getAll"]);
 
         Route::get('/{driver_id}', ['uses' => "\App\Http\Controllers\DriverController@getById"]);
@@ -27,7 +28,7 @@ Route::middleware([])->group(function () {
 
         Route::post('/', ['uses' => "\App\Http\Controllers\DriverController@save"]);
         Route::get('/{driver_id}/salary', ['uses' => "\App\Http\Controllers\DriverController@getSalary"]);
-        Route::get('/salary', ['uses' => "\App\Http\Controllers\DriverController@getSalaryForAll"]);
+
         Route::get('/payroll/settings', ['uses' => "\App\Http\Controllers\DriverController@getPayrollSettings"]);
     });
     Route::prefix('drivers')->group(function () {
