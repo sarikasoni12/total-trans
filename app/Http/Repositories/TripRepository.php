@@ -6,6 +6,7 @@ use App\Models\DriverModel;
 use App\Models\TripDocumentModel;
 use App\Models\TripDriverModel;
 use App\Models\TripModel;
+use App\Models\TripPaymentModel;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
@@ -195,5 +196,21 @@ class TripRepository
     {
         return TripModel::query()->with(['truck', 'trailer', 'broker', 'driver1', 'driver2', 'payments', 'documents', 'shipperAddress', 'consigneeAddress'])
             ->where('id', $tripId)->first();
+    }
+
+    public function getPayment(int $tripId): ?Model
+    {
+        return TripPaymentModel::query()->where('trip_id', $tripId)->first();
+    }
+
+    public function savePayment(int $tripId, array $data):Model
+    {
+        $payment = TripPaymentModel::query()->where('trip_id', $tripId)->first();
+        if($payment){
+            $payment->update(array_merge($data));
+        } else {
+           $payment = TripPaymentModel::query()->insertGetId(array_merge($data));
+        }
+        return $payment;
     }
 }

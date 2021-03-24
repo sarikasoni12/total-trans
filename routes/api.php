@@ -47,6 +47,8 @@ Route::middleware([])->group(function () {
         Route::post('/{trip_id}/address/{address_type}', ['uses' => "\App\Http\Controllers\TripController@saveAddress"]);
         Route::get('/{trip_id}/drivers', ['uses' => "\App\Http\Controllers\TripController@getDrivers"]);
         Route::post('/{trip_id}/drivers', ['uses' => "\App\Http\Controllers\TripController@saveDrivers"]);
+        Route::get('/{trip_id}/payment', ['uses' => "\App\Http\Controllers\TripController@getPayment"]);
+        Route::post('/{trip_id}/payment', ['uses' => "\App\Http\Controllers\TripController@savePayment"]);
 
 
         Route::post('/{trip_id}/border/connect/{type}', ['uses' => "\App\Http\Controllers\BorderController@connect"]);

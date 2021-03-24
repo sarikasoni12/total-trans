@@ -126,4 +126,20 @@ class TripController extends Controller
 
         return new JsonResponse($drivers, 200);
     }
+
+    public function getPayment($tripId):JsonResponse
+    {
+        $payment = $this->tripRepository->getPayment($tripId);
+        if($payment){
+            return new JsonResponse(['success' => true, 'data' => $payment], 200);
+        }
+        return new JsonResponse(['success' => false], 200);
+    }
+
+    public function savePayment(Request $request, $tripId):JsonResponse
+    {
+        $data = $request->request->all();
+        $payment = $this->tripRepository->savePayment($tripId, $data);
+        return new JsonResponse(['success' => true, 'data' => $payment], 200);
+    }
 }

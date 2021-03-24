@@ -7,6 +7,7 @@ import Search from "./search";
 import CheckIcon from "./Elements/CheckIcon";
 import Button from "./Elements/Button";
 import InvoiceButton from "./ui/invoiceButton";
+import AddPayment from "./ui/addPayment";
 
 const AllTrips = (props) => {
     const [trips, setTrips] = useState([]);
@@ -17,6 +18,7 @@ const AllTrips = (props) => {
     const [searchParam, setSearchParam] = useState([]);
     const [salary, setSalary] = useState([]);
     const [payments, setPayments] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const history = useHistory()
     useEffect(() => {
@@ -24,10 +26,8 @@ const AllTrips = (props) => {
             return key + '=' + searchParam[key]
         }).join('&');
 
-        get(`/trips?${queryString}`)
-            .then(res =>{
-                setTrips(res);
-            });
+        setLoading(true);
+        getTrips();
         get('/units')
             .then(res =>{
                 setUnits(res);
@@ -60,6 +60,20 @@ const AllTrips = (props) => {
 
     const onSearch = (params) => {
         setSearchParam(params)
+    }
+    const getTrips = () => {
+        setLoading(true);
+        let queryString = getQueryString();
+        get(`/trips?${queryString}`)
+            .then(res =>{
+                setTrips(res);
+                setLoading(false);
+            });
+    }
+    const getQueryString = () => {
+        return Object.keys(searchParam).map(function(key) {
+            return key + '=' + searchParam[key]
+        }).join('&');
     }
     const getTripTotalInCAD = () => {
         return trips.reduce((total, trip) => {
@@ -264,11 +278,25 @@ const AllTrips = (props) => {
                                                     // style="width: 80px;"
                                                     aria-label="Salary: activate to sort column ascending">Factoring
                                                 </th>
+                                                <th className="sorting" tabIndex="0"
+                                                    aria-controls="datatables-reponsive" rowSpan="1" colSpan="1"
+                                                    // style="width: 80px;"
+                                                    aria-label="Salary: activate to sort column ascending">Action
+                                                </th>
                                             </tr>
                                             </thead>
                                             <tbody>
+                                            {loading &&
+                                            <tr role="row" className="odd">
+                                                <td className="dtr-control sorting_1" tabIndex="0" colSpan={14} align={"center"}>
+                                                    <div className="spinner-border" role="status">
+                                                        <span className="visually-hidden"></span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            }
 
-                                            {trips.map((trip, index) => {
+                                            {!loading && trips.map((trip, index) => {
                                                return <tr role="row" className="odd">
                                                     <td className="dtr-control sorting_1" tabIndex="0">
                                                         <a href={"#"} onClick={() => editTrip(trip.id)}> {trip.id}</a>
@@ -325,6 +353,31 @@ const AllTrips = (props) => {
                                                    <td>
                                                        {trip.factoring_done && <CheckIcon />}
                                                    </td>
+                                                   <td>
+                                                       <div className="dropdown">
+                                                           <i className="bi bi-three-dots-vertical dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                               <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                    height="16" fill="currentColor"
+                                                                    className="bi bi-three-dots-vertical"
+                                                                    viewBox="0 0 16 16">
+                                                                   <path
+                                                                       d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                                               </svg>
+                                                           </i>
+                                                           <div className="dropdown-menu"
+                                                                aria-labelledby="dropdownMenuButton">
+                                                               <AddPayment
+                                                                   trip_id={trip.id}
+                                                                   currency={trip.currency}
+                                                                   invoiceNo={trip.invoice_number}
+                                                                   callback={getTrips}
+                                                                   amount={trip.price}
+                                                               />
+                                                               <a className="dropdown-item" href="#">Generate Invoice</a>
+                                                               <a className="dropdown-item" href="#">Send E-Manifest</a>
+                                                           </div>
+                                                       </div>
+                                                   </td>
                                                 </tr>
                                             })}
 
@@ -338,6 +391,7 @@ const AllTrips = (props) => {
                                                 <td >&nbsp;</td>
                                                 <td > ${number_format(getTripTotalInCAD())} (CAD) </td>
                                                 <td > ${number_format(getTripTotalInUSD())} (USD) </td>
+                                                <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
@@ -358,6 +412,7 @@ const AllTrips = (props) => {
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
+                                                <td > &nbsp; </td>
                                             </tr>
                                             <tr >
                                                 <td >&nbsp;</td>
@@ -368,6 +423,7 @@ const AllTrips = (props) => {
                                                 <td >&nbsp;</td>
                                                 <td >Total in (CAD)</td>
                                                 <td > ${number_format(getAllTripsTotalInCAD())} (CAD) </td>
+                                                <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
@@ -388,6 +444,7 @@ const AllTrips = (props) => {
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
+                                                <td > &nbsp; </td>
                                             </tr>
                                             <tr >
                                                 <td >&nbsp;</td>
@@ -398,6 +455,7 @@ const AllTrips = (props) => {
                                                 <td >Fuel/Repair paid by card (CAD)</td>
                                                 <td > ${number_format(getAllFuelInCAD())} (CAD) </td>
                                                 <td >${number_format( getAllTripsTotalInCAD() - getAllFuelInCAD() - getTotalUnitInstallmentAmount())} (CAD)</td>
+                                                <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
@@ -418,6 +476,7 @@ const AllTrips = (props) => {
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
+                                                <td > &nbsp; </td>
                                             </tr>
                                             <tr >
                                                 <td >&nbsp;</td>
@@ -428,6 +487,7 @@ const AllTrips = (props) => {
                                                 <td >Expenses in (CAD)</td>
                                                 <td > ${number_format(getAllExpensesInCAD())} (CAD) </td>
                                                 <td >${number_format(getAllTripsTotalInCAD() - getAllFuelInCAD() - getAllRepairInCAD() - getTotalUnitInstallmentAmount() - getAllExpensesInCAD())} (CAD)</td>
+                                                <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
@@ -448,6 +508,7 @@ const AllTrips = (props) => {
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
+                                                <td > &nbsp; </td>
                                             </tr>
                                             <tr >
                                                 <td >&nbsp;</td>
@@ -458,6 +519,7 @@ const AllTrips = (props) => {
                                                 <td >Payments in (CAD)</td>
                                                 <td > ${number_format(getTripPaymentInCAD())} (CAD) </td>
                                                 <td >&nbsp;</td>
+                                                <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
                                                 <td > &nbsp; </td>
