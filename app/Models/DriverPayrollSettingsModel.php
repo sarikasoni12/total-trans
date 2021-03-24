@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class DriverPayrollSettingsModel extends Model
 {
     protected $table = 'driver_payroll_settings';
+    public $timestamps = false;
 
     public function driver()
     {

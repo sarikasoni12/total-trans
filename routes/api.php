@@ -21,6 +21,11 @@ Route::middleware([])->group(function () {
 
     Route::prefix('driver')->group(function () {
         Route::get('/', ['uses' => "\App\Http\Controllers\DriverController@getAll"]);
+
+        Route::get('/{driver_id}', ['uses' => "\App\Http\Controllers\DriverController@getById"]);
+        Route::post('/{driver_id}', ['uses' => "\App\Http\Controllers\DriverController@update"]);
+
+        Route::post('/', ['uses' => "\App\Http\Controllers\DriverController@save"]);
         Route::get('/{driver_id}/salary', ['uses' => "\App\Http\Controllers\DriverController@getSalary"]);
         Route::get('/salary', ['uses' => "\App\Http\Controllers\DriverController@getSalaryForAll"]);
         Route::get('/payroll/settings', ['uses' => "\App\Http\Controllers\DriverController@getPayrollSettings"]);
@@ -41,6 +46,9 @@ Route::middleware([])->group(function () {
         Route::post('/{trip_id}/address/{address_type}', ['uses' => "\App\Http\Controllers\TripController@saveAddress"]);
         Route::get('/{trip_id}/drivers', ['uses' => "\App\Http\Controllers\TripController@getDrivers"]);
         Route::post('/{trip_id}/drivers', ['uses' => "\App\Http\Controllers\TripController@saveDrivers"]);
+
+
+        Route::post('/{trip_id}/border/connect/{type}', ['uses' => "\App\Http\Controllers\BorderController@connect"]);
 
         Route::get('/{trip_id}/document/{id}', ['uses' => "\App\Http\Controllers\TripDocumentController@get"]);
         Route::get('/{id}/invoice/next-number', ['uses' => "\App\Http\Controllers\InvoiceController@getNextInvoiceNumber"]);

@@ -5,7 +5,7 @@ import Trips from "./trips";
 import {domain} from './common/constants';
 import Salary from "./pages/salary";
 import Drivers from "./pages/drivers";
-import DriverForm from "./pages/driverForm";
+import DriverForm from "./pages/driver/driverForm";
 import NavBar from "./navBar";
 import Dashboard from "./dashboard";
 import Footer from "./footer";
@@ -26,8 +26,8 @@ const Page = () => {
         <Route exact={true} path={'/salary'} component={Salary}></Route>
         <Route exact={true} path={'/home'} component={Dashboard}></Route>
         <Route exact={true} path={'/drivers'} component={Drivers}></Route>
-        <Route exact={true} path={'/drivers'} component={Drivers}></Route>
         <Route exact={true} path={'/new-driver'} component={DriverForm}></Route>
+        <Route exact={true} path={'/driver/:id'} component={DriverForm}></Route>
     </BrowserRouter>;
 };
 

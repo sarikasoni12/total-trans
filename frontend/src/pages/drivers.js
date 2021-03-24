@@ -107,16 +107,16 @@ const Driver = () => {
                                         {drivers.map((driver, index) => {
                                             return <tr role="row" className="odd">
                                                 <td className="dtr-control sorting_1" tabIndex="0">
-                                                    {/*<a href={"#"} onClick={() => editTrip(trip.id)}> */}
+                                                    <a href={`/driver/${driver.id}`}>
                                                         {driver.first_name}
-                                                    {/*</a>*/}
+                                                    </a>
                                                 </td>
-                                                <td>{driver.cents_per_mile/100}</td>
-                                                <td>$ {driver.layover_fee}</td>
-                                                <td> $ {driver.pickup_delivery_fee} </td>
-                                                <td> $ {driver.layovborder_crossing_feeer_fee} </td>
-                                                <td> $ {driver.waiting_fee} </td>
-                                                <td>{driver.on_salary? <CheckIcon/>:"X"}</td>
+                                                <td>{parseInt(driver.payroll_settings.cents_per_mile)/100}</td>
+                                                <td>$ {driver.payroll_settings.layover_fee}</td>
+                                                <td> $ {driver.payroll_settings.pickup_delivery_fee} </td>
+                                                <td> $ {driver.payroll_settings.border_crossing_fee} </td>
+                                                <td> $ {driver.payroll_settings.waiting_fee} </td>
+                                                <td>{driver.payroll_settings.on_salary? <CheckIcon/>:"X"}</td>
                                             </tr>
                                         })}
                                         </tbody>

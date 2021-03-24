@@ -9,10 +9,12 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "ext-json": "^7.4",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
         "spipu/html2pdf": "^5.2",
+        "textalk/websocket": "^1.5",
         "tijsverkoyen/css-to-inline-styles": "^2.2"
     },
     "require-dev": {

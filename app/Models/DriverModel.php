@@ -12,4 +12,9 @@ class DriverModel extends Model
     {
         return $this->belongsTo(TeamModel::class, 'driver_id', 'id');
     }
+
+    public function payrollSettings()
+    {
+       return $this->hasOne(DriverPayrollSettingsModel::class, 'driver_id', 'id');
+    }
 }

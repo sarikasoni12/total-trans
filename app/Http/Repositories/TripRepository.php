@@ -190,4 +190,10 @@ class TripRepository
             ->where('driver_id', $driverId)
             ->first();
     }
+
+    public function getTripForManifest(int $tripId)
+    {
+        return TripModel::query()->with(['truck', 'trailer', 'broker', 'driver1', 'driver2', 'payments', 'documents', 'shipperAddress', 'consigneeAddress'])
+            ->where('id', $tripId)->first();
+    }
 }

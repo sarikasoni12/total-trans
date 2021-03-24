@@ -11275,11 +11275,11 @@ a.text-dark:focus, a.text-dark:hover {
     color: #6c757d
 }
 
-.alert {
-    padding: 0;
-    display: flex;
-    color: #212529
-}
+/*.alert {*/
+/*    padding: 0;*/
+/*    display: flex;*/
+/*    color: #212529*/
+/*}*/
 
 .alert b, .alert strong {
     color: #000

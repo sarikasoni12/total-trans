@@ -176,6 +176,10 @@ const TripForm = (props) => {
         setTrailer(newTrailerId);
     }
 
+    const sendManifest = () => {
+
+    }
+
     useEffect(() => {
 
         if (tripId) {
@@ -384,8 +388,16 @@ const TripForm = (props) => {
         <div className=" form-group">
             <UploadFiles onFileChange={onFileChange} documents={uploads} tripId={tripId}/>
         </div>
-        <div>
-            <input className={"btn btn-primary btn-lg"} type='button' name='save' value={'Save Trip'} onClick={saveTrip}/>
+        <div class="btn-toolbar" role="toolbar">
+
+            <div className="btn-group mr-2">
+                <input className={"btn btn-secondary btn-lg"} type='button' name='save' value={'Send E-Manifest'}
+                       onClick={sendManifest}/>
+            </div>
+            <div className="btn-group mr-2">
+                <input className={"btn btn-primary btn-lg"} type='button' name='manifest' value={'Save Trip'}
+                       onClick={saveTrip}/>
+            </div>
         </div>
     </form>
 };

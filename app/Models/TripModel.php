@@ -30,7 +30,7 @@ class TripModel extends Model
     ];
 
     protected $dates = ['vendor_order_date', 'pickup_date', 'expected_delivery_date', 'delivery_date'];
-    protected $dateFormat = 'Y-m-d';
+    protected $dateFormat = 'Y-m-d H:i:s';
     protected $casts = [
       'factoring_done' => "boolean"
     ];
