@@ -55,7 +55,7 @@ const NavBar = () => {
                                        </ul>
                                    </li>
                                    <li className="sidebar-item">
-                                       <a href="/trips" data-toggle="collapse" className="sidebar-link collapsed">
+                                       <a href="/trips"  className="sidebar-link">
                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
                                                 strokeLinecap="round" strokeLinejoin="round"

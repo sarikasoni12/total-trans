@@ -9,4 +9,5 @@ class CompanyModel extends Model
 {
 
     protected $table = 'company';
+    public $timestamps = false;
 }

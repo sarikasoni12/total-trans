@@ -11,6 +11,7 @@ import Dashboard from "./dashboard";
 import Footer from "./footer";
 import Header from "./header";
 import AllTrips from "./allTrips";
+import Settings from "./pages/settings/settings";
 // const NavBar = () => {
 //   return <div>
 //       <div className={'navItem'}> <a href={`${domain}/trips`}>Trips</a> </div>
@@ -28,6 +29,7 @@ const Page = () => {
         <Route exact={true} path={'/drivers'} component={Drivers}></Route>
         <Route exact={true} path={'/new-driver'} component={DriverForm}></Route>
         <Route exact={true} path={'/driver/:id'} component={DriverForm}></Route>
+        <Route exact={true} path={'/settings'} component={Settings}></Route>
     </BrowserRouter>;
 };
 

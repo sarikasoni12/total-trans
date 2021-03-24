@@ -35,7 +35,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/driver/{id}', function () {
         return view('trip');
     });
-
+    Route::get('/settings', function () {
+        return view('trip');
+    });
 
     Route::get('/', function () {
         return view('welcome');
@@ -44,6 +46,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
 });
+
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Auth::routes();
 

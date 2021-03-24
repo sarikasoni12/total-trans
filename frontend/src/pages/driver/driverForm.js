@@ -132,7 +132,7 @@ const DriverForm = (props) => {
                 </div>
                 <div className="form-group col-md-3">
                     <label htmlFor="inputPassword4">DOB</label>
-                    <input type="text" className="form-control" id="inputPassword4" placeholder="DOB"
+                    <input type="text" className="form-control" id="inputPassword4" placeholder="YYYY-MM-DD"
                            value={dob}
                            onChange={(e)=>{setDob(e.target.value)}}/>
                 </div>

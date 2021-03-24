@@ -57,6 +57,9 @@ Route::middleware([])->group(function () {
         Route::get('/{id}/invoice', ['uses' => "\App\Http\Controllers\InvoiceController@get"]);
     });
 
+    Route::get('/settings', ['uses' => "\App\Http\Controllers\SettingsController@get"]);
+    Route::post('/settings', ['uses' => "\App\Http\Controllers\SettingsController@save"]);
+
 
     Route::get('/payment', ['uses' => "\App\Http\Controllers\TripPaymentController@get"]);
     Route::get('/repair', ['uses' => "\App\Http\Controllers\RepairController@getAll"]);
