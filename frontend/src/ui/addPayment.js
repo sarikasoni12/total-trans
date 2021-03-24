@@ -7,7 +7,6 @@ const AddPayment = (props) => {
 
     const handleClose = () => {
         setShow(false);
-        props.callback();
     }
     const handleShow = () => setShow(true);
 
@@ -24,6 +23,7 @@ const AddPayment = (props) => {
                 currency={props.currency}
                 invoiceNo={props.invoiceNo}
                 amount={props.amount}
+                callback={props.callback}
             />}
         </React.Fragment>
     );

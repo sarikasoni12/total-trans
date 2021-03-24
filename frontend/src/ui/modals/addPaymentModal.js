@@ -16,7 +16,7 @@ const AddPaymentModal = (props) => {
                     if(res.success){
                         let data = res.data;
                         let day = 60 * 60 * 24 * 1000;
-                        let paidDate = new Date(Date.parse(data.paid_on)+day);
+                        let paidDate = data.paid_on !==null?new Date(Date.parse(data.paid_on)+day): paidDate;
                         setAmount(data.amount);
                         setPaidDate(paidDate);
                         setPaidFullAmount(data.paid_full_amount);
@@ -38,6 +38,7 @@ const AddPaymentModal = (props) => {
         .then(res => {
             if(res.success){
                 props.handleClose();
+                props.callback();
             }
         })
     }
