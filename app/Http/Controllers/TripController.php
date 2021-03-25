@@ -33,6 +33,7 @@ class TripController extends Controller
         $search['driver_id'] = $request->query->get('driver_id', null);
         $search['truck_id'] = $request->query->get('truck_id', null);
         $search['broker_id'] = $request->query->get('broker_id', null);
+        $search['outsourced'] = $request->query->get('outsourced', null);
 
         $trips = $this->tripRepository->getAll($search);
         return new JsonResponse($trips, 200);

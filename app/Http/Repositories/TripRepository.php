@@ -36,6 +36,9 @@ class TripRepository
         if(isset($search['broker_id'])){
             $qry->where('broker_id', $search['broker_id']);
         }
+        if(isset($search['outsourced'])){
+            $qry->where('outsourced', $search['outsourced']);
+        }
         return $qry->orderBy('id', 'asc')->get();
     }
 

@@ -8,9 +8,15 @@ abstract class BorderService
 {
 
     abstract public function getInstance(): IBorderVendor;
-    public function connect(int $tripId, string $type): array
+    public function createTrip(int $tripId, string $type): array
     {
         $instance = $this->getInstance();
-        return $instance->connect($tripId, $type);
+        return $instance->createTrip($tripId, $type);
+    }
+
+    public function updateTrip(int $tripId, string $type): array
+    {
+        $instance = $this->getInstance();
+        return $instance->updateTrip($tripId, $type);
     }
 }

@@ -51,7 +51,8 @@ Route::middleware([])->group(function () {
         Route::post('/{trip_id}/payment', ['uses' => "\App\Http\Controllers\TripController@savePayment"]);
 
 
-        Route::post('/{trip_id}/border/connect/{type}', ['uses' => "\App\Http\Controllers\BorderController@connect"]);
+        Route::post('/{trip_id}/border/create/{type}', ['uses' => "\App\Http\Controllers\BorderController@createTrip"]);
+        Route::post('/{trip_id}/border/update/{type}', ['uses' => "\App\Http\Controllers\BorderController@updateTrip"]);
 
         Route::get('/{trip_id}/document/{id}', ['uses' => "\App\Http\Controllers\TripDocumentController@get"]);
         Route::get('/{id}/invoice/next-number', ['uses' => "\App\Http\Controllers\InvoiceController@getNextInvoiceNumber"]);

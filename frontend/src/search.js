@@ -20,6 +20,8 @@ const Search = (props) => {
     let [brokers, setBrokers] = useState([]);
     let [brokerId, setBrokerId] = useState('');
 
+    let [outsourced, setOutsourced] = useState(false);
+
     useEffect( () => {
         get(`/driver`)
             .then(res =>{
@@ -42,7 +44,8 @@ const Search = (props) => {
             to_date: formatDate(toDate),
             driver_id: driverId,
             truck_id: truckId,
-            broker_id: brokerId
+            broker_id: brokerId,
+            outsourced: outsourced?1:0
         };
         props.onSearch? props.onSearch(params):'';
     }
@@ -56,7 +59,7 @@ const Search = (props) => {
     return (
         <div className="form-row">
                     {/*<div className={'card'}>*/}
-                        <div className={"form-group col-md-2"}>
+                    <div className={"form-group col-md-2"}>
                             <select
                                 name={'driver'}
                                 onChange={(e) => {setDriverId(e.target.value)}}
@@ -71,7 +74,7 @@ const Search = (props) => {
                             </select>
                         {/*</div>*/}
                     </div>
-                    <div className={'form-group col-md-2'}>
+                    <div className={'form-group col-md-1'}>
                         {/*<div className={"element"}>*/}
                             <select
                                 name={'trucks'}
@@ -124,15 +127,18 @@ const Search = (props) => {
                         />
                     </div>
                     <div className={'form-group col-md-2'}>
-
-                    <div className="btn" type="button" onClick={searchTrip}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                             fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-                             strokeLinejoin="round" className="feather feather-search align-middle">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                        </svg>
+                        <label htmlFor="paidOn">Outsourced:</label>
+                        <input type={"checkbox"} checked={outsourced?"checked":""} onClick={() => setOutsourced(!outsourced)}/>
                     </div>
+                    <div className={'form-group col-md-1'}>
+                        <div className="btn" type="button" onClick={searchTrip}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+                                 strokeLinejoin="round" className="feather feather-search align-middle">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                        </div>
                     </div>
                 </div>
     )
