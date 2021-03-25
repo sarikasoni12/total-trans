@@ -57,6 +57,9 @@ const TripForm = (props) => {
     //------LIST DATA
     let [tripId, setTripId] = useState(props.match.params && props.match.params.id);
 
+    let [outsourced, setOutsourced] = useState(false);
+    let [outsourcedCarrierId, setOutsourcedCarrierId] = useState('');
+
     const validateFields = () => {
         if (startDate === ''
             || expectEndDate === ''
@@ -84,6 +87,8 @@ const TripForm = (props) => {
             pickup_date: formatDate(startDate),
             expected_delivery_date: formatDate(expectEndDate),
             delivery_date: formatDate(endDate),
+            outsourced: outsourced?1:0,
+            outsourced_carrier_id: parseInt(outsourcedCarrierId),
             truck_unit: truck,
             trailer_unit: trailer,
             pickup_location: pickUpLocation,
@@ -193,6 +198,8 @@ const TripForm = (props) => {
                     setStartDate(start);
                     setExpectedEndDate(expected_delivery);
                     setEndDate(delivery);
+                    setOutsourced(res.outsourced? true: false );
+                    setOutsourcedCarrierId(res.outsourced_carrier_id);
                     setTruck(res.truck_unit);
                     setTrailer(res.trailer_unit);
                     setPickUpLocation(res.pickup_location);
@@ -279,15 +286,28 @@ const TripForm = (props) => {
                 </div>
             </div>
         </div>
-
-        <TripDates
-            startDate={startDate}
-            setStartDate={setStartDate}
-            expectEndDate={expectEndDate}
-            setExpectedEndDate={setExpectedEndDate}
-            endDate={endDate}
-            setEndDate={setEndDate}
-        />
+        <div className="form-row">
+            <TripDates
+                startDate={startDate}
+                setStartDate={setStartDate}
+                expectEndDate={expectEndDate}
+                setExpectedEndDate={setExpectedEndDate}
+                endDate={endDate}
+                setEndDate={setEndDate}
+            />
+            <div className={'form-group col-md-2'}>
+                <label htmlFor={"outsourced"}>Outsource:</label>
+                <input id={"outsourced"} type={"checkbox"} checked={outsourced?"checked":""} onClick={() => {setOutsourced(!outsourced)}}/>
+            </div>
+            <div className={'form-group col-md-2'}>
+                <Brokers
+                    brokerId={outsourcedCarrierId}
+                    addBroker={setOutsourcedCarrierId}
+                    label={"Outsourced Carrier"}
+                    className={""}
+                />
+            </div>
+        </div>
         <div className="form-row">
             <div className={'col-md-5'}>
                 <h6>Shipper Address</h6>

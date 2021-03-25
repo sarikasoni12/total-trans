@@ -11,8 +11,8 @@ const Brokers = (props) => {
                 setBrokers(res);
             });
     }, [])
-    return <div className="form-group col-md-2">
-        <label form={"broker"}>Brokers:</label>
+    return <div className={props.className === undefined?"form-group col-md-2":`form-group ${props.className}`}>
+        <label form={"broker"}>{props.label?props.label: "Brokers"}:</label>
         <select
             id={"broker"}
             className="form-control"

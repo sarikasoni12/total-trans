@@ -28418,3 +28418,8 @@ div.dataTables_wrapper span.select-info, div.dataTables_wrapper span.select-item
 .extra-1 {
     height: 133px; transform: translate3d(0px, 0px, 0px); display: block;
 }
+
+
+.table-striped tbody tr.outsourced-trip{
+    background-color: #f3f37947;
+}

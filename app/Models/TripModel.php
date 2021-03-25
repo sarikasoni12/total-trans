@@ -15,6 +15,8 @@ class TripModel extends Model
         'pickup_date',
         'expected_delivery_date',
         'delivery_date',
+        'outsourced',
+        'outsourced_carrier_id',
         'truck_unit',
         'trailer_unit',
         'pickup_location',

@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 
 const TripDates = (props) => {
 
-    return <div className="form-row">
+    return <React.Fragment>
         <div className={'form-group col-md-2'}>
             <label for={"pickup-date"}>Pick-up Date:</label>
             <DatePicker
@@ -45,7 +45,7 @@ const TripDates = (props) => {
             {/*</div>*/}
             {/*{props.endDate === '' && <small className="validation-message">*Enter valid delivery Date</small>}*/}
         </div>
-    </div>
+    </React.Fragment>
 }
 
 export default TripDates;

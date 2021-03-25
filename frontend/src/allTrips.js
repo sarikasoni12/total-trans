@@ -77,12 +77,16 @@ const AllTrips = (props) => {
     }
     const getTripTotalInCAD = () => {
         return trips.reduce((total, trip) => {
-            return trip.currency === 'CAD'? total+parseInt(trip.price): total+0;
+            if(!trip.outsourced) {
+                return trip.currency === 'CAD' ? total + parseInt(trip.price) : total + 0;
+            }
         }, 0)
     };
     const getTripTotalInUSD = () => {
         return trips.reduce((total, trip) => {
-            return trip.currency === 'USD'? total+parseInt(trip.price): total+0;
+            if(!trip.outsourced) {
+                return trip.currency === 'USD' ? total + parseInt(trip.price) : total + 0;
+            }
         }, 0)
     };
     const getAllTripsTotalInCAD = () => {
@@ -90,7 +94,9 @@ const AllTrips = (props) => {
     };
     const getTotalMiles = () => {
         return trips.reduce((total, trip) => {
-            return total+parseInt(trip.miles);
+            if(!trip.outsourced) {
+                return total + parseInt(trip.miles);
+            }
         }, 0)
     };
     const getTotalUnitInstallmentAmount = () => {
@@ -297,7 +303,7 @@ const AllTrips = (props) => {
                                             }
 
                                             {!loading && trips.map((trip, index) => {
-                                               return <tr role="row" className="odd">
+                                               return <tr role="row" className={trip.outsourced?`odd outsourced-trip`: `odd`}>
                                                     <td className="dtr-control sorting_1" tabIndex="0">
                                                         <a href={"#"} onClick={() => editTrip(trip.id)}> {trip.id}</a>
                                                     </td>
