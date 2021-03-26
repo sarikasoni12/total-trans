@@ -1,8 +1,8 @@
 import React from 'react';
 import {BrowserRouter, Route} from "react-router-dom";
 import TripForm from "./tripForm";
-import Trips from "./trips";
-import {domain} from './common/constants';
+import Expenses from "./pages/expenses/expenses";
+import ExpenseForm from "./pages/expenses/expenseForm";
 import Salary from "./pages/salary";
 import Drivers from "./pages/drivers";
 import DriverForm from "./pages/driver/driverForm";
@@ -30,6 +30,9 @@ const Page = () => {
         <Route exact={true} path={'/new-driver'} component={DriverForm}></Route>
         <Route exact={true} path={'/driver/:id'} component={DriverForm}></Route>
         <Route exact={true} path={'/settings'} component={Settings}></Route>
+        <Route exact={true} path={'/expenses'} component={Expenses}></Route>
+        <Route exact={true} path={'/new-expense'} component={ExpenseForm}></Route>
+        <Route exact={true} path={'/expenses/:id'} component={ExpenseForm}></Route>
     </BrowserRouter>;
 };
 

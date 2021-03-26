@@ -45,6 +45,7 @@ Route::middleware([])->group(function () {
         Route::get('/{id}', ['uses' => "\App\Http\Controllers\TripController@getById"]);
         Route::post('/{trip_id}/upload-documents', ['uses' => "\App\Http\Controllers\TripController@uploadDocuments"]);
         Route::post('/{trip_id}/address/{address_type}', ['uses' => "\App\Http\Controllers\TripController@saveAddress"]);
+
         Route::get('/{trip_id}/drivers', ['uses' => "\App\Http\Controllers\TripController@getDrivers"]);
         Route::post('/{trip_id}/drivers', ['uses' => "\App\Http\Controllers\TripController@saveDrivers"]);
         Route::get('/{trip_id}/payment', ['uses' => "\App\Http\Controllers\TripController@getPayment"]);
@@ -68,7 +69,13 @@ Route::middleware([])->group(function () {
     Route::get('/payment', ['uses' => "\App\Http\Controllers\TripPaymentController@get"]);
     Route::get('/repair', ['uses' => "\App\Http\Controllers\RepairController@getAll"]);
     Route::get('/fuel', ['uses' => "\App\Http\Controllers\FuelController@getAll"]);
-    Route::get('/expenses', ['uses' => "\App\Http\Controllers\ExpensesController@getAllExpenses"]);
+
+    Route::get('/expenses', ['uses' => "\App\Http\Controllers\ExpensesController@get"]);
+    Route::get('/expenses/{id}', ['uses' => "\App\Http\Controllers\ExpensesController@getById"]);
+    Route::post('/expenses', ['uses' => "\App\Http\Controllers\ExpensesController@save"]);
+    Route::post('/expenses/{id}', ['uses' => "\App\Http\Controllers\ExpensesController@update"]);
+
+
     Route::get('/salary', ['uses' => "\App\Http\Controllers\TripSalaryController@getAll"]);
     Route::get('/process-trip-salary', ['uses' => '\App\Http\Controllers\ProcessTripSalaryController@processTripSalary']);
     Route::get('/units', ['uses' => "\App\Http\Controllers\UnitController@getAll"]);

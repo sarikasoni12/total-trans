@@ -38,6 +38,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/settings', function () {
         return view('trip');
     });
+    Route::get('/expenses', function () {
+        return view('trip');
+    });
+    Route::get('/new-expense', function () {
+        return view('trip');
+    });
+    Route::get('/expenses/{id}', function () {
+        return view('trip');
+    });
 
     Route::get('/', function () {
         return view('welcome');
